@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
-
-import OnboardImage1 from "../../assets/images/onboardingImg1.svg";
+import { Title } from "./onboard-first-screen.style";
+import OnboardImage1 from "../../../assets/images/onboardingImg1.svg";
 
 export default function OnboardingScreen1() {
   return (
     <View style={styles.container}>
       <OnboardImage1 />
-      <Text>Products you love</Text>
-      <Text>Grow your business by accepting card payments with a new card reader</Text>
+
+      <Title>Products you love</Title>
+      <Text>
+        Grow your business by accepting card payments with a new card reader
+      </Text>
     </View>
   );
 }
