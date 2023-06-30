@@ -48,6 +48,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useFonts, Quicksand_400Regular, Quicksand_700Bold } from "@expo-google-fonts/quicksand";
 import OnboardingScreen1 from "./src/screens/Onboarding/FirstScreen";
+import OnboardingScreen2 from "./src/screens/Onboarding/SecondScreen";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -62,7 +63,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text style={{ fontFamily: 'Quicksand_700Bold', fontSize: 40 }}>Inter Black</Text> */}
-      <OnboardingScreen1 />
+      <OnboardingScreen2 />
     </View>
   );
 }
@@ -70,7 +71,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

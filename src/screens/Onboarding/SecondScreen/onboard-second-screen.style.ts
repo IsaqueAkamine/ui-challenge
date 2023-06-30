@@ -6,7 +6,12 @@ export const Container = styled.View`
   background-color: #fff;
   align-items: center;
   justify-content: center;
+`;
+
+export const Body = styled.View`
   padding: 0 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Title = styled.Text`
@@ -32,7 +37,7 @@ export const GroupScreens = styled.View`
 `;
 
 export const ButtonContainer = styled.View`
-  background-color: #FBFDFD;
+  background-color: #fbfdfd;
   width: 136px;
   height: 136px;
   margin: 58px 0 0 0;
