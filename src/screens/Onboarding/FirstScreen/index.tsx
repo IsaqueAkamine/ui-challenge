@@ -1,4 +1,5 @@
 import {
+  ButtonContainer,
   ButtonNavigate,
   Container,
   Description,
@@ -6,6 +7,7 @@ import {
   Title,
 } from "./onboard-first-screen.style";
 import OnboardImage1 from "../../../assets/images/onboardingImg1.svg";
+import NextIcon from "../../../assets/icons/next-icon.svg";
 
 export default function OnboardingScreen1() {
   return (
@@ -18,7 +20,11 @@ export default function OnboardingScreen1() {
       </Description>
 
       <GroupScreens />
-      <ButtonNavigate />
+      <ButtonContainer>
+        <ButtonNavigate>
+          <NextIcon />
+        </ButtonNavigate>
+      </ButtonContainer>
     </Container>
   );
 }

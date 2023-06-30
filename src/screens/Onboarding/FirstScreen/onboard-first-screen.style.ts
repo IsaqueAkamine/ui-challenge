@@ -30,10 +30,28 @@ export const GroupScreens = styled.View`
   margin: 42px 0 0 0;
 `;
 
-export const ButtonNavigate = styled.TouchableOpacity`
-  background-color: #ff5678;
-  width: 150px;
-  height: 150px;
-  margin: 42px 0 0 0;
+export const ButtonContainer = styled.View`
+  background-color: #fff;
+  width: 136px;
+  height: 136px;
+  margin: 58px 0 0 0;
   border-radius: 75px;
+  border-width: 1px;
+  border-color: #d1d1d1;
+  border-right-width: 3px;
+  border-right-color: #ff5678;
+  transform: rotate(-45deg);
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ButtonNavigate = styled.TouchableOpacity`
+  position: absolute;
+  background-color: #ff5678;
+  width: 104px;
+  height: 104px;
+  border-radius: 55px;
+  transform: rotate(45deg);
+  align-items: center;
+  justify-content: center;
 `;
