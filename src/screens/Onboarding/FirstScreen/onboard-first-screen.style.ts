@@ -22,6 +22,7 @@ export const Description = styled.Text`
   font-size: 20px;
   margin: 19px 0 0 0;
   text-align: center;
+  padding: 0 40px;
 `;
 
 export const GroupScreens = styled.View`
@@ -32,7 +33,7 @@ export const GroupScreens = styled.View`
 `;
 
 export const ButtonContainer = styled.View`
-  background-color: #FBFDFD;
+  background-color: #fbfdfd;
   width: 136px;
   height: 136px;
   margin: 58px 0 0 0;

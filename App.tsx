@@ -63,7 +63,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text style={{ fontFamily: 'Quicksand_700Bold', fontSize: 40 }}>Inter Black</Text> */}
-      <OnboardingScreen2 />
+      <OnboardingScreen1 />
+      {/* <OnboardingScreen2 /> */}
     </View>
   );
 }
