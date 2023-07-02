@@ -1,17 +1,10 @@
 import React, { useState, useRef } from "react";
 import { FlatList, Animated, View } from "react-native";
 import { slides } from "./slides";
-import {
-  ButtonContainer,
-  ButtonNavigate,
-  Container,
-  Description,
-  GroupScreens,
-  ItemContent,
-  Title,
-} from "./onboarding-style";
+import { Container, ItemContent } from "./onboarding-style";
 import OnboardingItem from "./OnboardingItem";
 import Paginator from "./Paginator";
+import NextButton from "./NextButton";
 
 export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,6 +16,14 @@ export default function Onboarding() {
   }).current;
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+  const scrollTo = () => {
+    if (currentIndex < slides.length - 1) {
+      slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      console.log("last item");
+    }
+  };
 
   return (
     <Container>
@@ -45,19 +46,13 @@ export default function Onboarding() {
           ref={slidesRef}
         />
       </ItemContent>
+
       <Paginator data={slides} scrollX={scrollX} />
 
-      {/* <Title>Products you love</Title>
-      <Description>
-        Grow your business by accepting card payments with a new card reader
-      </Description> */}
-
-      {/* <GroupScreens />
-      <ButtonContainer>
-        <ButtonNavigate>
-          <NextIcon />
-        </ButtonNavigate>
-      </ButtonContainer> */}
+      <NextButton
+        scrollTo={scrollTo}
+        percentage={(currentIndex + 1) * (100 / slides.length)}
+      />
     </Container>
   );
 }

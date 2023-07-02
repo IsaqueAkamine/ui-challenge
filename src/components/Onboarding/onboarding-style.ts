@@ -37,36 +37,3 @@ export const Description = styled.Text`
   text-align: center;
   padding: 0 40px;
 `;
-
-// export const GroupScreens = styled.View`
-//   background-color: #453988;
-//   width: 100px;
-//   height: 10px;
-//   margin: 42px 0 0 0;
-// `;
-
-// export const ButtonContainer = styled.View`
-//   background-color: #fbfdfd;
-//   width: 136px;
-//   height: 136px;
-//   margin: 58px 0 0 0;
-//   border-radius: 75px;
-//   border-width: 1px;
-//   border-color: #d1d1d1;
-//   border-right-width: 3px;
-//   border-right-color: ${COLORS.onboardingButtonPrimary};
-//   transform: rotate(-45deg);
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// export const ButtonNavigate = styled.TouchableOpacity`
-//   position: absolute;
-//   background-color: ${COLORS.onboardingButtonPrimary};
-//   width: 104px;
-//   height: 104px;
-//   border-radius: 55px;
-//   transform: rotate(45deg);
-//   align-items: center;
-//   justify-content: center;
-// `;
