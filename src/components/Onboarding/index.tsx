@@ -11,6 +11,7 @@ import {
   Title,
 } from "./onboarding-style";
 import OnboardingItem from "./OnboardingItem";
+import Paginator from "./Paginator";
 
 export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,10 +24,6 @@ export default function Onboarding() {
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-  // const _viewabilityConfig = useRef({
-  //   viewAreaCoveragePercentThreshold: 60,
-  // });
-
   return (
     <Container>
       <ItemContent>
@@ -34,7 +31,7 @@ export default function Onboarding() {
           data={slides}
           renderItem={({ item }) => <OnboardingItem item={item} />}
           horizontal
-          showsHorizontalScrollIndicator
+          showsHorizontalScrollIndicator={false}
           pagingEnabled
           bounces={false}
           keyExtractor={(item) => item.id}
@@ -48,7 +45,8 @@ export default function Onboarding() {
           ref={slidesRef}
         />
       </ItemContent>
- 
+      <Paginator data={slides} scrollX={scrollX} />
+
       {/* <Title>Products you love</Title>
       <Description>
         Grow your business by accepting card payments with a new card reader
