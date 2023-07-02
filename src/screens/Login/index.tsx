@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function OnboardingScreen3() {
+export default function Login() {
   return (
     <View style={styles.container}>
-      <Text>Onboarding screen 3</Text>
+      <Text>Login screen</Text>
     </View>
   );
 }
