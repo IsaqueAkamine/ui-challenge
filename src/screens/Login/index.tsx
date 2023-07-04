@@ -1,7 +1,18 @@
 import { StatusBar } from "react-native";
 import Header from "../../components/Header";
-import { Container, Description, Form, Title } from "./login-style";
+import {
+  Container,
+  Description,
+  Footer,
+  Form,
+  HaveAccountButton,
+  HaveAccountContainer,
+  HaveAccountSignUp,
+  HaveAccountText,
+  Title,
+} from "./login-style";
 import Input from "../../components/Input";
+import RegistrationButton from "../../components/RegistrationButton";
 
 export default function Login() {
   return (
@@ -14,13 +25,25 @@ export default function Login() {
       <Form>
         <Input
           description="Your Email"
-          inputProps={{ placeholder: "name@email.com" }}
+          inputProps={{
+            placeholder: "name@email.com",
+            keyboardType: "email-address",
+          }}
         />
         <Input
           description="Your Password"
-          inputProps={{ placeholder: "**********" }}
+          inputProps={{ placeholder: "**********", secureTextEntry: true }}
         />
       </Form>
+      <Footer>
+        <RegistrationButton description="Login" />
+        <HaveAccountContainer>
+          <HaveAccountText>Do you have an account?</HaveAccountText>
+          <HaveAccountButton>
+            <HaveAccountSignUp>Sign up</HaveAccountSignUp>
+          </HaveAccountButton>
+        </HaveAccountContainer>
+      </Footer>
     </Container>
   );
 }

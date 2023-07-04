@@ -33,7 +33,7 @@ export const Title = styled.Text`
 export const Description = styled.Text`
   color: ${COLORS.loginGray5};
   font-size: 26px;
-  font-family: Roboto;
+  /* font-family: Roboto; */
   font-style: normal;
   font-weight: 400;
   /* line-height: 144%; */
@@ -41,21 +41,40 @@ export const Description = styled.Text`
 `;
 
 export const Form = styled.View`
+  flex: 1;
   gap: 36px;
+  margin-top: 56px;
 `;
 
-export const ActionButtonsContainer = styled.View``;
+export const Footer = styled.View``;
 
-export const ButtonsContainer = styled.View`
-  padding: 0 32px;
-  gap: 10px;
-  margin: 0 0 20px 0;
-`;
-
-export const ForgotPasswordContainer = styled.View`
+export const HaveAccountContainer = styled.View`
+  margin-top: 20px;
+  margin-bottom: 46px;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  gap: 8px;
 `;
 
-export const ForgotPasswordButton = styled.TouchableOpacity``;
-export const ForgotPasswordText = styled.Text``;
+export const HaveAccountText = styled.Text`
+  color: #7c7d89;
+  text-align: center;
+  font-size: 16px;
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: 400;
+  /* line-height: 140%; */
+  letter-spacing: 0.16px;
+`;
+export const HaveAccountButton = styled.TouchableOpacity``;
+export const HaveAccountSignUp = styled.Text`
+  color: #f0f0f0;
+  text-align: center;
+  font-size: 16px;
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: 400;
+  /* line-height: 140%; */
+  letter-spacing: 0.16px;
+`;
