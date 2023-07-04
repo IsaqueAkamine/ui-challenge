@@ -6,4 +6,8 @@ export const COLORS = {
   onboardingButtonPrimary: "#ff5678",
   // your colors
   welcomeBackground: "#B6EDFF",
+  loginBackground: "#191720",
+  loginTitle: "#B6EDFF",
+  loginGray5: "#e0e0e0",
+  loginInput: "#3f3f48",
 };
