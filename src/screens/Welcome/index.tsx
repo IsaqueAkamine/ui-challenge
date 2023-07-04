@@ -18,8 +18,8 @@ export default function Welcome() {
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
 
-  function handleLogin() {
-    navigation.navigate("Login");
+  function handleNavigate(route: string) {
+    navigation.navigate(route);
   }
 
   return (
@@ -35,10 +35,20 @@ export default function Welcome() {
       <ActionButtonsContainer>
         <ButtonsContainer>
           <RegistrationButton description="Sign up" dark />
-          <RegistrationButton description="Login" onPress={handleLogin} />
+          <RegistrationButton
+            description="Login"
+            onPress={() => {
+              handleNavigate("Login");
+            }}
+          />
         </ButtonsContainer>
         <ForgotPasswordContainer>
-          <ForgotPasswordButton activeOpacity={0.7}>
+          <ForgotPasswordButton
+            activeOpacity={0.7}
+            onPress={() => {
+              handleNavigate("Home");
+            }}
+          >
             <ForgotPasswordText>Forgot password?</ForgotPasswordText>
           </ForgotPasswordButton>
         </ForgotPasswordContainer>
