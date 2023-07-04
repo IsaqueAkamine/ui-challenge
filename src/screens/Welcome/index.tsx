@@ -1,5 +1,6 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   ActionButtonsContainer,
@@ -15,6 +16,11 @@ import RegistrationButton from "../../components/RegistrationButton";
 
 export default function Welcome() {
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
+
+  function handleLogin() {
+    navigation.navigate("Login");
+  }
 
   return (
     <Container>
@@ -29,7 +35,7 @@ export default function Welcome() {
       <ActionButtonsContainer>
         <ButtonsContainer>
           <RegistrationButton description="Sign up" dark />
-          <RegistrationButton description="Login" />
+          <RegistrationButton description="Login" onPress={handleLogin} />
         </ButtonsContainer>
         <ForgotPasswordContainer>
           <ForgotPasswordButton activeOpacity={0.7}>

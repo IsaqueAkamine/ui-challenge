@@ -8,7 +8,7 @@ export const Container = styled.View`
 export const Description = styled.Text`
   color: #fff;
   font-size: 14px;
-  font-family: Roboto;
+  /* font-family: Roboto; */
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.14px;
