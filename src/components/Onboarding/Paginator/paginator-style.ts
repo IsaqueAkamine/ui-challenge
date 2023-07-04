@@ -3,7 +3,8 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex-direction: row;
-  height: 64px;
+  height: 10px;
+  margin-top: 42px;
 `;
 
 export const Dot = styled(Animated.View)`
