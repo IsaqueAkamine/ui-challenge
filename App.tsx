@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
-  useFonts,
+  useFonts as useQuickSand,
   Quicksand_400Regular,
   Quicksand_700Bold,
 } from "@expo-google-fonts/quicksand";
+import {
+  useFonts as useSahitya,
+  Sahitya_400Regular,
+  Sahitya_700Bold,
+} from "@expo-google-fonts/sahitya";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Routes from "./src/routes";
@@ -24,10 +29,16 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [viewedOnboarding, setViewedOnboarding] = useState(false);
 
-  let [fontsLoaded] = useFonts({
+  let [fontsLoaded] = useQuickSand({
     Quicksand_400Regular,
     Quicksand_700Bold,
   });
+
+  let [fontsLoadedSahitya] = useSahitya({
+    Sahitya_400Regular,
+    Sahitya_700Bold,
+  });
+  
   const checkOnBoarding = async () => {
     try {
       const value = await AsyncStorage.getItem("@viewedOnboarding");
@@ -46,7 +57,7 @@ export default function App() {
     checkOnBoarding();
   }, []);
 
-  if (!fontsLoaded || loading) {
+  if ((!fontsLoaded || !fontsLoadedSahitya) || loading) {
     return <Loading />;
   }
 

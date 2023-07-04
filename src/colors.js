@@ -5,4 +5,5 @@ export const COLORS = {
   onboardingTitlePrimary: "#493E8A",
   onboardingButtonPrimary: "#ff5678",
   // your colors
+  welcomeBackground: "#B6EDFF",
 };
