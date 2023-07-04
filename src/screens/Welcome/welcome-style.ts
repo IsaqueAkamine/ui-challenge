@@ -1,10 +1,19 @@
+import { Platform, StatusBar } from "react-native";
 import styled from "styled-components/native";
 import { COLORS } from "../../colors";
+import {
+  getStatusBarHeight,
+  getBottomSpace,
+} from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${COLORS.welcomeBackground};
   justify-content: space-between;
+  padding-top: ${Platform.OS === "ios"
+    ? getStatusBarHeight()
+    : StatusBar.currentHeight}px;
+  padding-bottom: ${getBottomSpace()}px;
 `;
 
 export const Title = styled.Text`
