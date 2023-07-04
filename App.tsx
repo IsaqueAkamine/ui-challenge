@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   useFonts,
   Quicksand_400Regular,
@@ -7,6 +8,7 @@ import {
 } from "@expo-google-fonts/quicksand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import Routes from "./src/routes";
 import Onboarding from "./src/components/Onboarding";
 import HomeScreen from "./src/screens/HomeScreen";
 
@@ -49,9 +51,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      {viewedOnboarding ? <HomeScreen /> : <Onboarding />}
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        {viewedOnboarding ? <Routes /> : <Onboarding />}
+      </View>
+    </NavigationContainer>
   );
 }
 
