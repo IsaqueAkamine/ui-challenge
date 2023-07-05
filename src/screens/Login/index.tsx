@@ -1,5 +1,9 @@
+import React from "react";
 import { StatusBar } from "react-native";
+import { useAuth } from "../../contexts/auth";
 import Header from "../../components/Header";
+import Input from "../../components/Input";
+import RegistrationButton from "../../components/RegistrationButton";
 import {
   Container,
   Description,
@@ -11,10 +15,23 @@ import {
   HaveAccountText,
   Title,
 } from "./login-style";
-import Input from "../../components/Input";
-import RegistrationButton from "../../components/RegistrationButton";
 
 export default function Login() {
+  const { signIn } = useAuth();
+  // const [email, setEmail]
+  let email = "";
+  let password = "";
+
+  function handleEmail(value: string) {
+    email = value;
+  }
+  function handlePassword(value: string) {
+    password = value;
+  }
+
+  function handleLogin() {
+    signIn(email, password);
+  }
   return (
     <Container>
       <StatusBar barStyle={"light-content"} />
@@ -28,15 +45,24 @@ export default function Login() {
           inputProps={{
             placeholder: "name@email.com",
             keyboardType: "email-address",
+            onChangeText: (text) => {
+              handleEmail(text);
+            },
           }}
         />
         <Input
           description="Your Password"
-          inputProps={{ placeholder: "**********", secureTextEntry: true }}
+          inputProps={{
+            placeholder: "**********",
+            secureTextEntry: true,
+            onChangeText: (text) => {
+              handlePassword(text);
+            },
+          }}
         />
       </Form>
       <Footer>
-        <RegistrationButton description="Login" />
+        <RegistrationButton onPress={handleLogin} description="Login" />
         <HaveAccountContainer>
           <HaveAccountText>Do you have an account?</HaveAccountText>
           <HaveAccountButton>

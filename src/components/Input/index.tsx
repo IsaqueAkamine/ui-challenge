@@ -8,7 +8,6 @@ interface InputProps {
 }
 
 export default function Input({ description, inputProps }: InputProps) {
-  console.log("PROPS:", inputProps);
   return (
     <Container>
       <Description>{description}</Description>

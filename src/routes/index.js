@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "../contexts/auth";
-import AuthRoutes from "./AuthRoutes";
+import { useAuth } from "../contexts/auth";
 
 import {
   useFonts as useQuickSand,
@@ -17,8 +15,8 @@ import {
 } from "@expo-google-fonts/sahitya";
 
 import Onboarding from "../components/Onboarding";
-
-const Stack = createNativeStackNavigator();
+import AuthRoutes from "./AuthRoutes";
+import AppStack from "./AppStack";
 
 const Loading = () => {
   return (
@@ -30,7 +28,7 @@ const Loading = () => {
 
 export default function Routes() {
   const [loading, setLoading] = useState(true);
-  const { viewedOnboarding, hideOnboarding } = useContext(AuthContext);
+  const { viewedOnboarding, hideOnboarding, authData } = useAuth();
 
   let [fontsLoaded] = useQuickSand({
     Quicksand_400Regular,
@@ -68,5 +66,5 @@ export default function Routes() {
     return <Onboarding />;
   }
 
-  return <AuthRoutes />;
+  return authData ? <AppStack /> : <AuthRoutes />;
 }

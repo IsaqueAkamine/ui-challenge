@@ -43,12 +43,7 @@ export default function Welcome() {
           />
         </ButtonsContainer>
         <ForgotPasswordContainer>
-          <ForgotPasswordButton
-            activeOpacity={0.7}
-            onPress={() => {
-              handleNavigate("Home");
-            }}
-          >
+          <ForgotPasswordButton activeOpacity={0.7}>
             <ForgotPasswordText>Forgot password?</ForgotPasswordText>
           </ForgotPasswordButton>
         </ForgotPasswordContainer>

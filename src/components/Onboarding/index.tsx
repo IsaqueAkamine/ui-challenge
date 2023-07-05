@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import { FlatList, Animated } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "../../contexts/auth";
+import { useAuth } from "../../contexts/auth";
 
 import OnboardingItem from "./OnboardingItem";
 import Paginator from "./Paginator";
@@ -14,7 +14,7 @@ export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
-  const { hideOnboarding } = useContext(AuthContext);
+  const { hideOnboarding } = useAuth();
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
