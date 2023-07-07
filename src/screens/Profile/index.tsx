@@ -1,4 +1,7 @@
 import React from "react";
+import Header from "../../components/Header";
+import SocialData from "./SocialData";
+
 import {
   Container,
   FollowButton,
@@ -9,8 +12,6 @@ import {
   UserLocation,
   UserName,
 } from "./profile-styles";
-import Header from "../../components/Header";
-import SocialData from "./SocialData";
 
 export default function ProfileScreen() {
   const image = require("../../assets/images/profile-img.jpg");
