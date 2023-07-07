@@ -27,8 +27,8 @@ const Loading = () => {
 };
 
 export default function Routes() {
-  const [loading, setLoading] = useState(true);
-  const { viewedOnboarding, hideOnboarding, authData } = useAuth();
+  // const [loading, setLoading] = useState(true);
+  const { viewedOnboarding, hideOnboarding, authData, loading, setLoadingAppData } = useAuth();
 
   let [fontsLoaded] = useQuickSand({
     Quicksand_400Regular,
@@ -50,7 +50,7 @@ export default function Routes() {
     } catch (error) {
       console.log("Error @checkOnboarding", error);
     } finally {
-      setLoading(false);
+      setLoadingAppData(false)
     }
   };
 
