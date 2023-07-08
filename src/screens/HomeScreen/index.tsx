@@ -1,8 +1,8 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Container, Title } from "./home-style";
+import { ClearButton, ClearButtonText, Container } from "./home-style";
 import { removeLoggedUser } from "../../storages/AuthStorage";
 
 export default function HomeScreen() {
@@ -16,10 +16,18 @@ export default function HomeScreen() {
   };
   return (
     <Container>
-      <Title>Home screen </Title>
-      <TouchableOpacity onPress={clearOnboarding}>
-        <Title>Clear async storage</Title>
-      </TouchableOpacity>
+      <Image
+        source={require("../../assets/icons/drawer-icon.png")}
+        style={{
+          width: 260,
+          height: 195,
+          borderRadius: 4,
+          resizeMode: "contain",
+        }}
+      />
+      <ClearButton onPress={clearOnboarding}>
+        <ClearButtonText>Log Out</ClearButtonText>
+      </ClearButton>
     </Container>
   );
 }
