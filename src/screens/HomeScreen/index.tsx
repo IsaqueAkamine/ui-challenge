@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
@@ -18,10 +18,18 @@ import {
 } from "./home-style";
 
 export default function HomeScreen() {
+  const [currentLanguage, setCurrentLanguage] = useState("en");
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (value: string) => {
-    i18n.changeLanguage(value);
+    i18n
+      .changeLanguage(value)
+      .then(() => {
+        setCurrentLanguage(value);
+      })
+      .catch((error) => {
+        console.log("Error @changeLanguage", error);
+      });
   };
 
   const clearOnboarding = async () => {
@@ -35,12 +43,17 @@ export default function HomeScreen() {
 
   return (
     <Container>
-
       <ButtonLanguageContainer>
-        <ButtonLanguage onPress={() => changeLanguage("en")}>
+        <ButtonLanguage
+          onPress={() => changeLanguage("en")}
+          selected={currentLanguage === "en"}
+        >
           <ButtonLanguageText>English</ButtonLanguageText>
         </ButtonLanguage>
-        <ButtonLanguage onPress={() => changeLanguage("ptBR")}>
+        <ButtonLanguage
+          onPress={() => changeLanguage("ptBR")}
+          selected={currentLanguage === "ptBR"}
+        >
           <ButtonLanguageText>Português Brasil</ButtonLanguageText>
         </ButtonLanguage>
       </ButtonLanguageContainer>
@@ -65,7 +78,6 @@ export default function HomeScreen() {
       <ClearButton onPress={clearOnboarding}>
         <ClearButtonText>{t("home.Log Out")}</ClearButtonText>
       </ClearButton>
-      
     </Container>
   );
 }

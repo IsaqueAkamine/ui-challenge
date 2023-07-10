@@ -1,10 +1,14 @@
 import styled from "styled-components/native";
 import { COLORS } from "../../colors";
 
+interface ButtonLanguageProps {
+  selected: boolean;
+}
+
 export const Container = styled.View`
   flex: 1;
   padding: 40px 28px;
-  background-color: #fff;
+  background-color: ${COLORS.loginGray5};
 `;
 
 export const ButtonLanguageContainer = styled.View`
@@ -13,8 +17,8 @@ export const ButtonLanguageContainer = styled.View`
   gap: 8px;
 `;
 
-export const ButtonLanguage = styled.TouchableOpacity`
-  border-color: ${COLORS.loginGray5};
+export const ButtonLanguage = styled.TouchableOpacity<ButtonLanguageProps>`
+  border-color: ${(props) => (props.selected ? COLORS.black : "transparent")};
   border-width: 1px;
   border-radius: 4px;
   background-color: ${COLORS.userFollowButton};
