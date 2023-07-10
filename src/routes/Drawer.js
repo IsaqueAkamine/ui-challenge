@@ -5,6 +5,7 @@ import {
 import { Image, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/Profile";
@@ -12,6 +13,7 @@ import ProfileScreen from "../screens/Profile";
 const Drawer = createDrawerNavigator();
 
 export default function DrawerMenu() {
+  const { t } = useTranslation();
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -45,8 +47,8 @@ export default function DrawerMenu() {
         component={HomeScreen}
         options={{
           headerShown: true,
-          drawerLabel: "Home",
-          title: "Home",
+          drawerLabel: t("routes.Home"),
+          title: t("routes.Home"),
           drawerIcon: ({ size, color }) => (
             <Feather name="home" size={size} color={color} />
           ),

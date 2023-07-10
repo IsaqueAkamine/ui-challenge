@@ -1,0 +1,12 @@
+{
+  "translation": {
+    "routes":{
+      "Home": "Inicio"
+    },
+    "home": {
+      "Welcome": "Bem vindo",
+      "to UI Challenge app": "ao app de UI Challenge",
+      "Log Out": "Sair"
+    }
+  }
+}

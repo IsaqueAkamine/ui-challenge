@@ -44,7 +44,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   async function loadLoggedUserFromStorage() {
     const loggedUser = await getLoggedUser();
-    console.log("LOGGED USER: ", loggedUser);
     if (loggedUser) {
       setAuth(JSON.parse(loggedUser));
     }

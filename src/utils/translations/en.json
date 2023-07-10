@@ -1,0 +1,12 @@
+{
+  "translation": {
+    "routes":{
+      "Home": "Home"
+    },
+    "home": {
+      "Welcome": "Welcome",
+      "to UI Challenge app": "to UI Challenge app",
+      "Log Out": "Log Out"
+    }
+  }
+}
