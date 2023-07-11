@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Description, InputStyled } from "./input.style";
 import { TextInputProps } from "react-native";
+import { COLORS } from "../../colors";
 
 interface InputProps {
   description: string;
@@ -11,7 +12,7 @@ export default function Input({ description, inputProps }: InputProps) {
   return (
     <Container>
       <Description>{description}</Description>
-      <InputStyled {...inputProps} />
+      <InputStyled {...inputProps} placeholderTextColor={COLORS.loginInput} />
     </Container>
   );
 }
