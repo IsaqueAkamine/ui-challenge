@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/Profile";
+import Responsivity from "../screens/Responsivity";
 
 const Drawer = createDrawerNavigator();
 
@@ -62,6 +63,18 @@ export default function DrawerMenu() {
           title: "Profile",
           drawerIcon: ({ size, color }) => (
             <Feather name="user" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Responsivity"
+        component={Responsivity}
+        options={{
+          headerShown: false,
+          drawerLabel: "Responsivity",
+          title: "Responsivity",
+          drawerIcon: ({ size, color }) => (
+            <Feather name="layout" size={size} color={color} />
           ),
         }}
       />
