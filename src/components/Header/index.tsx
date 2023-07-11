@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { BackButton, Container } from "./header-style";
+import { BackButton, Container } from "./header.style";
 
 interface HeaderProps {
   iconColor?: string;

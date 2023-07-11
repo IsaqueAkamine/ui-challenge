@@ -11,7 +11,7 @@ import {
   UserDescription,
   UserLocation,
   UserName,
-} from "./profile-styles";
+} from "./profile.styles";
 
 export default function ProfileScreen() {
   const image = require("../../assets/images/profile-img.jpg");

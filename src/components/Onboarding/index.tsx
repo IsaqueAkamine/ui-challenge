@@ -8,7 +8,7 @@ import Paginator from "./Paginator";
 import NextButton from "./NextButton";
 
 import { slides } from "./slides";
-import { Container, ItemContent } from "./onboarding-style";
+import { Container, ItemContent } from "./onboarding.style";
 
 export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);

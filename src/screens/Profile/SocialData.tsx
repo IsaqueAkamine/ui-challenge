@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Description, Title } from "./social-styles";
+import { Container, Description, Title } from "./social.styles";
 
 interface SocialDataProps {
   title: string;

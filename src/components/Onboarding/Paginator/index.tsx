@@ -1,6 +1,6 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
-import { Container, Dot } from "./paginator-style";
+import { Container, Dot } from "./paginator.style";
 
 export default function Paginator({ data, scrollX }) {
   const { width } = useWindowDimensions();

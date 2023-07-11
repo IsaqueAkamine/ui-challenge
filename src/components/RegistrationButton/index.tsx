@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Description } from "./registration-style";
+import { Container, Description } from "./registration.style";
 
 interface RegistrationButtonProps {
   description: string;

@@ -14,7 +14,7 @@ import {
   HaveAccountSignUp,
   HaveAccountText,
   Title,
-} from "./login-style";
+} from "./login.style";
 
 export default function Login() {
   const { signIn } = useAuth();

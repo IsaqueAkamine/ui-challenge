@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageSourcePropType, View, useWindowDimensions } from "react-native";
-import { Content, Description, Image, Title } from "./onboarding-item-style";
+import { Content, Description, Image, Title } from "./onboarding-item.style";
 
 interface ItemProps {
   id: string;

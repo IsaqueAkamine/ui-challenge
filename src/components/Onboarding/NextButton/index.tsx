@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { AntDesign } from "@expo/vector-icons";
 
-import { ButtonNext, Container } from "./next-button-style";
+import { ButtonNext, Container } from "./next-button.style";
 
 export default function NextButton({ percentage, scrollTo }) {
   const size = 128;

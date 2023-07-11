@@ -15,7 +15,7 @@ import {
   ImageContainer,
   WelcomeContainer,
   WelcomeText,
-} from "./home-style";
+} from "./home.style";
 
 export default function HomeScreen() {
   const [currentLanguage, setCurrentLanguage] = useState("en");

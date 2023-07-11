@@ -11,7 +11,7 @@ import {
   ForgotPasswordText,
   Image,
   Title,
-} from "./welcome-style";
+} from "./welcome.style";
 import RegistrationButton from "../../components/RegistrationButton";
 
 export default function Welcome() {
