@@ -3,6 +3,9 @@
     "routes":{
       "Home": "Inicio"
     },
+    "notifications": {
+      "Fail to fetch data": "Não foi possível carregar todos os dados"
+    },
     "home": {
       "Welcome": "Bem vindo",
       "to UI Challenge app": "ao app de UI Challenge",

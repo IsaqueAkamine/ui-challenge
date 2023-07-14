@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/Profile";
 import Responsivity from "../screens/Responsivity";
+import GitHubUserScreen from "../screens/GitHubUser";
 
 const Drawer = createDrawerNavigator();
 
@@ -66,7 +67,7 @@ export default function DrawerMenu() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Responsivity"
         component={Responsivity}
         options={{
@@ -75,6 +76,18 @@ export default function DrawerMenu() {
           title: "Responsivity",
           drawerIcon: ({ size, color }) => (
             <Feather name="layout" size={size} color={color} />
+          ),
+        }}
+      /> */}
+      <Drawer.Screen
+        name="UserData"
+        component={GitHubUserScreen}
+        options={{
+          headerShown: false,
+          drawerLabel: "Github User",
+          title: "Github User",
+          drawerIcon: ({ size, color }) => (
+            <Feather name="github" size={size} color={color} />
           ),
         }}
       />

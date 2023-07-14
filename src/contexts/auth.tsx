@@ -20,6 +20,8 @@ interface AuthContextData {
   signOut: () => Promise<void>;
   hideOnboarding: () => void;
   loading: boolean;
+  loadingApiData: boolean;
+  setLoadingApiData: (value: boolean) => any;
 }
 
 interface Props {
@@ -34,6 +36,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [authData, setAuth] = useState<AuthData>();
   const [viewedOnboarding, setViewedOnboarding] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingApiData, setLoadingApiData] = useState(false);
 
   function hideOnboarding() {
     setViewedOnboarding(true);
@@ -82,6 +85,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         signOut,
         loading,
         setLoadingAppData,
+        loadingApiData,
+        setLoadingApiData,
       }}
     >
       {children}

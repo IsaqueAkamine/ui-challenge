@@ -14,4 +14,5 @@ export const COLORS = {
   userPrimary: "#334968",
   userSecondary: "#8CA2C1",
   userFollowButton: "#6976EB",
+  userText: "#493E8A",
 };

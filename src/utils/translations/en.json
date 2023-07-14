@@ -3,6 +3,9 @@
     "routes":{
       "Home": "Home"
     },
+    "notifications": {
+      "Fail to fetch data": "Could not fetch all data"
+    },
     "home": {
       "Welcome": "Welcome",
       "to UI Challenge app": "to UI Challenge app",
