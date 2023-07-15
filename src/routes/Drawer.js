@@ -19,7 +19,7 @@ export default function DrawerMenu() {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, unmountOnBlur: true }}
       drawerContent={(props) => {
         return (
           <SafeAreaView>
