@@ -7,10 +7,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
-import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/Profile";
-import Responsivity from "../screens/Responsivity";
-import GitHubUserScreen from "../screens/GitHubUser";
+import {
+  HomeScreen,
+  ProfileScreen,
+  Responsivity,
+  GitHubUserScreen,
+  SearchResults,
+} from "../screens";
 
 const Drawer = createDrawerNavigator();
 
@@ -88,6 +91,18 @@ export default function DrawerMenu() {
           title: "Github User",
           drawerIcon: ({ size, color }) => (
             <Feather name="github" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="SearchResults"
+        component={SearchResults}
+        options={{
+          headerShown: false,
+          drawerLabel: "Search Results",
+          title: "Search Results",
+          drawerIcon: ({ size, color }) => (
+            <Feather name="search" size={size} color={color} />
           ),
         }}
       />
