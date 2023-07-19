@@ -21,5 +21,13 @@ export const COLORS = {
     buttonBack: "#39455F",
     buttonFilters: "#DADAFF",
     buttonFilterText: "#2E3A59",
+    primaryText: "#39455F",
+  },
+  jobsCard: {
+    primaryText: "#39455F",
+    secondaryText: "#81848B",
+    experienceBackground: "#FFF3FF",
+    experienceText: "#D464D6",
+    logoBackground: "#F7F7FF",
   },
 };

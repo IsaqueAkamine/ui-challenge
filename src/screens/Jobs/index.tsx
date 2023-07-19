@@ -11,7 +11,8 @@ import {
   JobsFoundText,
   Title,
   TitleContainer,
-} from "./jobs.styles";
+} from "./jobs.style";
+import JobCard from "../../components/JobCard";
 
 function Jobs() {
   console.log("teste");
@@ -36,6 +37,8 @@ function Jobs() {
         <Title>Product Designers</Title>
         <JobsFoundText>32 job founds</JobsFoundText>
       </TitleContainer>
+
+      <JobCard />
     </Container>
   );
 }
