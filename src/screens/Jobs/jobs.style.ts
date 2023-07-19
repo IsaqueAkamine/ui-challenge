@@ -9,7 +9,7 @@ import {
 export const Container = styled.View`
   flex: 1;
   background-color: #fff;
-  padding: 0 22px;
+  /* padding: 0 22px; */
   padding-top: ${Platform.OS === "ios"
     ? getStatusBarHeight()
     : StatusBar.currentHeight}px;
@@ -54,4 +54,8 @@ export const JobsFoundText = styled.Text`
   font-size: 14px;
   font-family: "Quicksand_400Regular";
   text-align: right;
+`;
+
+export const JobFlatlist = styled.FlatList`
+  padding: 0 22px;
 `;

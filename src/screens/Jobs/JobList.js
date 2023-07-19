@@ -1,0 +1,38 @@
+export default [
+  {
+    id: 1,
+    title: "Senior Product Designers",
+    experience: "2 yrs",
+    salary: "$80 - $120K/ year",
+    companyName: "InVision",
+    location: "Remote",
+    icon: "invision",
+  },
+  {
+    id: 2,
+    title: "UI/UX Designers",
+    experience: "3 yrs",
+    salary: "$120 - $160K/ year",
+    companyName: "Notion",
+    location: "San Francisco",
+    icon: "notion",
+  },
+  {
+    id: 3,
+    title: "Junior Product Designer",
+    experience: "1 yrs",
+    salary: "$70 - $100K/ year",
+    companyName: "SnapChat",
+    location: "San Francisco",
+    icon: "snapchat",
+  },
+  {
+    id: 4,
+    title: "Visual & Product Designers",
+    experience: "2 yrs",
+    salary: "$80 - $120K/ year",
+    companyName: "InVision",
+    location: "Remote",
+    icon: "invision",
+  },
+];
