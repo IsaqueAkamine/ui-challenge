@@ -12,8 +12,8 @@ import {
   ProfileScreen,
   Responsivity,
   GitHubUserScreen,
-  SearchResults,
 } from "../screens";
+import { JobStack } from "./JobStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -96,7 +96,7 @@ export default function DrawerMenu() {
       />
       <Drawer.Screen
         name="SearchResults"
-        component={SearchResults}
+        component={JobStack}
         options={{
           headerShown: false,
           drawerLabel: "Search Results",

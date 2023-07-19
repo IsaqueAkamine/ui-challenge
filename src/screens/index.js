@@ -1,6 +1,7 @@
 import Example from "./Example";
 import GitHubUserScreen from "./GitHubUser";
 import HomeScreen from "./HomeScreen";
+import Jobs from "./Jobs";
 import Login from "./Login";
 import ProfileScreen from "./Profile";
 import Responsivity from "./Responsivity";
@@ -11,6 +12,7 @@ export {
   Example,
   GitHubUserScreen,
   HomeScreen,
+  Jobs,
   Login,
   ProfileScreen,
   Responsivity,

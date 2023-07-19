@@ -10,6 +10,11 @@
       "Welcome": "Bem vindo",
       "to UI Challenge app": "ao app de UI Challenge",
       "Log Out": "Sair"
+    },
+    "search-results": {
+      "title": "Encontre o seu emprego perfeito",
+      "description": "Milhares de empregos. Encontre a melhor empresa para suas habilidades e localização.",
+      "start-button": "Comece agora"
     }
   }
 }
