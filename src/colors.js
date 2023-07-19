@@ -18,5 +18,8 @@ export const COLORS = {
 
   searchResults: {
     button: "#8A89E9",
+    buttonBack: "#39455F",
+    buttonFilters: "#DADAFF",
+    buttonFilterText: "#2E3A59",
   },
 };

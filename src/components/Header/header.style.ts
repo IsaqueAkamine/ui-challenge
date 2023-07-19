@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  margin-top: 14px;
+  flex-direction: row;
   height: 40px;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const BackButton = styled.TouchableOpacity`
