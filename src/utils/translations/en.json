@@ -10,6 +10,11 @@
       "Welcome": "Welcome",
       "to UI Challenge app": "to UI Challenge app",
       "Log Out": "Log Out"
+    },
+    "search-results": {
+      "title": "Find your perfect job",
+      "description": "Thousands of jobs. Find the best company for your skills and location.",
+      "start-button": "Start now"
     }
   }
 }
