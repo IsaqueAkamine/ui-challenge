@@ -3,7 +3,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
 import styled from "styled-components/native";
-import { COLORS } from "../../colors";
+import { COLORS } from "../../constants/colors";
 import {
   getStatusBarHeight,
   getBottomSpace,

@@ -1,6 +1,6 @@
 import { Platform, StatusBar } from "react-native";
 import styled from "styled-components/native";
-import { COLORS } from "../../colors";
+import { COLORS } from "../../constants/colors";
 import {
   getStatusBarHeight,
   getBottomSpace,

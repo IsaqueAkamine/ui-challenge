@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { COLORS } from "../../../colors";
+import { COLORS } from "../../../constants/colors";
 
 export const Image = styled.Image`
   flex: 0.7;

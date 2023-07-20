@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 
 import JobList from "./JobList";
 
 import Header from "../../components/Header";
 import JobCard from "../../components/JobCard";
-import { COLORS } from "../../colors";
+import FilterModal from "./FilterModal";
+import { COLORS } from "../../constants/colors";
 
 import {
   Container,
@@ -19,10 +20,13 @@ import {
 } from "./jobs.style";
 
 function Jobs() {
+  const [showFilterModal, setShowFilterModal] = useState(false);
+
   const filterIcon = require("../../assets/images/SearchResults/filtericon.png");
+
   function HeaderRightButton() {
     return (
-      <FilterButton>
+      <FilterButton onPress={() => setShowFilterModal(true)}>
         <FilterButtonText>Filters</FilterButtonText>
         <FilterButtonIcon source={filterIcon} resizeMode="contain" />
       </FilterButton>
@@ -45,6 +49,13 @@ function Jobs() {
         conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
         rightButton={HeaderRightButton}
       />
+
+      {showFilterModal && (
+        <FilterModal
+          isVisible={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
+        />
+      )}
 
       <JobFlatlist
         ListHeaderComponent={ListHeader}

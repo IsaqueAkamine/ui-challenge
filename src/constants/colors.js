@@ -1,6 +1,9 @@
 export const COLORS = {
   white: "#fff",
   black: "#000",
+  gray: "#898B9A",
+  gray2: "#BBBDC1",
+  gray3: "#CFD0D7",
   onboardingSecondaryText: "#4A4D53",
   onboardingTitlePrimary: "#493E8A",
   onboardingButtonPrimary: "#ff5678",
@@ -22,6 +25,12 @@ export const COLORS = {
     buttonFilters: "#DADAFF",
     buttonFilterText: "#2E3A59",
     primaryText: "#39455F",
+  },
+  jobs: {
+    transparentBlack7: "rgba(0, 0, 0, 0.7)",
+    lightGray2: "#F5F5F8",
+    range: "#81848B",
+    primary: "#D464D6",
   },
   jobsCard: {
     primaryText: "#39455F",
