@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
-import { JobProvider } from "../../contexts/job";
+import { useJob } from "../../contexts/job";
 
-import JobList from "./JobList";
+// import JobList from "./JobList";
 
 import Header from "../../components/Header";
 import JobCard from "../../components/JobCard";
@@ -22,6 +22,7 @@ import {
 
 function Jobs() {
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const { jobList } = useJob();
 
   const filterIcon = require("../../assets/images/SearchResults/filtericon.png");
 
@@ -44,36 +45,34 @@ function Jobs() {
   }
 
   return (
-    <JobProvider>
-      <Container>
-        <Header
-          iconColor={COLORS.searchResults.buttonBack}
-          conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
-          rightButton={HeaderRightButton}
-        />
+    <Container>
+      <Header
+        iconColor={COLORS.searchResults.buttonBack}
+        conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
+        rightButton={HeaderRightButton}
+      />
 
-        {showFilterModal && (
-          <FilterModal
-            isVisible={showFilterModal}
-            onClose={() => setShowFilterModal(false)}
-          />
-        )}
-
-        <JobFlatlist
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={ListHeader}
-          data={JobList}
-          keyExtractor={(item) => `job-card-${item.id}`}
-          renderItem={({ item }) => {
-            return <JobCard item={item} />;
-          }}
-          contentContainerStyle={{
-            gap: 25,
-            paddingBottom: getBottomSpace(),
-          }}
+      {showFilterModal && (
+        <FilterModal
+          isVisible={showFilterModal}
+          onClose={() => setShowFilterModal(false)}
         />
-      </Container>
-    </JobProvider>
+      )}
+
+      <JobFlatlist
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={ListHeader}
+        data={jobList}
+        keyExtractor={(item) => `job-card-${item.id}`}
+        renderItem={({ item }) => {
+          return <JobCard item={item} />;
+        }}
+        contentContainerStyle={{
+          gap: 25,
+          paddingBottom: getBottomSpace(),
+        }}
+      />
+    </Container>
   );
 }
 

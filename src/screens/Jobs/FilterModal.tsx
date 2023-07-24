@@ -32,7 +32,8 @@ interface FilterModalProps {
 }
 
 function FilterModal({ isVisible, onClose }: FilterModalProps) {
-  const { roleListSelected, changeRoleListSelected } = useJob();
+  const { roleListSelected, changeRoleListSelected, filterJobByRole } =
+    useJob();
   const { width, height } = Dimensions.get("window");
   const modalAnimatedValue = useRef(new Animated.Value(0)).current;
   const [showFilterModal, setShowFilterModal] = useState(isVisible);
@@ -77,6 +78,11 @@ function FilterModal({ isVisible, onClose }: FilterModalProps) {
 
   function handleSelectedRole(id: number) {
     changeRoleListSelected(id);
+  }
+
+  function handleFilter() {
+    filterJobByRole();
+    setShowFilterModal(false);
   }
 
   function findRoleSelected(id: number) {
@@ -163,7 +169,7 @@ function FilterModal({ isVisible, onClose }: FilterModalProps) {
           {/* Tags */}
           {renderTags()}
 
-          <ApplyButton>
+          <ApplyButton onPress={handleFilter}>
             <ApplyButtonText>Apply filter</ApplyButtonText>
           </ApplyButton>
         </Animated.View>
