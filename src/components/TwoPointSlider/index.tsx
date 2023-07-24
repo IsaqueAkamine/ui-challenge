@@ -6,12 +6,12 @@ import { COLORS, SIZES } from "../../constants";
 // import { Container } from './styles';
 
 interface TwoPointSliderProps {
-  values: [number];
+  values: number[];
   min: number;
   max: number;
   prefix: string;
   postfix: string;
-  onValuesChange: () => null;
+  onValuesChange: (values: number[]) => undefined;
 }
 
 function TwoPointSlider({

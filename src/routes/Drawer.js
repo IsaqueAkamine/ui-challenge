@@ -21,7 +21,7 @@ export default function DrawerMenu() {
   const { t } = useTranslation();
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="SearchResults"
       screenOptions={{ headerShown: false, unmountOnBlur: true }}
       drawerContent={(props) => {
         return (

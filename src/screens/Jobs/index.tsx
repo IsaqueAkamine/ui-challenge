@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+import { JobProvider } from "../../contexts/job";
 
 import JobList from "./JobList";
 
@@ -43,33 +44,36 @@ function Jobs() {
   }
 
   return (
-    <Container>
-      <Header
-        iconColor={COLORS.searchResults.buttonBack}
-        conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
-        rightButton={HeaderRightButton}
-      />
-
-      {showFilterModal && (
-        <FilterModal
-          isVisible={showFilterModal}
-          onClose={() => setShowFilterModal(false)}
+    <JobProvider>
+      <Container>
+        <Header
+          iconColor={COLORS.searchResults.buttonBack}
+          conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
+          rightButton={HeaderRightButton}
         />
-      )}
 
-      <JobFlatlist
-        ListHeaderComponent={ListHeader}
-        data={JobList}
-        keyExtractor={(item) => `job-card-${item.id}`}
-        renderItem={({ item }) => {
-          return <JobCard item={item} />;
-        }}
-        contentContainerStyle={{
-          gap: 25,
-          paddingBottom: getBottomSpace(),
-        }}
-      />
-    </Container>
+        {showFilterModal && (
+          <FilterModal
+            isVisible={showFilterModal}
+            onClose={() => setShowFilterModal(false)}
+          />
+        )}
+
+        <JobFlatlist
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={ListHeader}
+          data={JobList}
+          keyExtractor={(item) => `job-card-${item.id}`}
+          renderItem={({ item }) => {
+            return <JobCard item={item} />;
+          }}
+          contentContainerStyle={{
+            gap: 25,
+            paddingBottom: getBottomSpace(),
+          }}
+        />
+      </Container>
+    </JobProvider>
   );
 }
 

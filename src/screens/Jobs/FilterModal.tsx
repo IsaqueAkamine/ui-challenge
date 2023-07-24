@@ -5,6 +5,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useJob } from "../../contexts/job";
+
 import Section from "../../components/Section";
 import TwoPointSlider from "../../components/TwoPointSlider";
 import { COLORS, role } from "../../constants";
@@ -30,10 +32,10 @@ interface FilterModalProps {
 }
 
 function FilterModal({ isVisible, onClose }: FilterModalProps) {
+  const { roleListSelected, changeRoleListSelected } = useJob();
   const { width, height } = Dimensions.get("window");
   const modalAnimatedValue = useRef(new Animated.Value(0)).current;
   const [showFilterModal, setShowFilterModal] = useState(isVisible);
-  const [roleTag, setRoleTag] = useState(0);
 
   useEffect(() => {
     if (showFilterModal) {
@@ -66,11 +68,31 @@ function FilterModal({ isVisible, onClose }: FilterModalProps) {
             max={200}
             prefix="$"
             postfix="k"
-            onValuesChange={(values) => console.log(values)}
+            onValuesChange={(values: number[]) => console.log(values)}
           />
         </SalaryRangeContainer>
       </Section>
     );
+  }
+
+  function handleSelectedRole(id: number) {
+    changeRoleListSelected(id);
+  }
+
+  function findRoleSelected(id: number) {
+    return roleListSelected.find((item) => item == id);
+  }
+
+  function selectedRoleBackgroundColor(id: number) {
+    const color = findRoleSelected(id)
+      ? COLORS.jobs.primary
+      : COLORS.jobs.range;
+    return color;
+  }
+
+  function selectedRoleTextColor(id: number) {
+    const color = findRoleSelected(id) ? COLORS.white : COLORS.loginGray5;
+    return color;
   }
 
   function renderTags() {
@@ -82,18 +104,12 @@ function FilterModal({ isVisible, onClose }: FilterModalProps) {
               <TagButton
                 key={`role-${index}`}
                 style={{
-                  backgroundColor:
-                    item.id == roleTag
-                      ? COLORS.jobs.primary
-                      : COLORS.jobs.range,
+                  backgroundColor: selectedRoleBackgroundColor(item.id),
                 }}
-                onPress={() => setRoleTag(item.id)}
+                onPress={() => handleSelectedRole(item.id)}
               >
                 <TagButtonText
-                  style={{
-                    color:
-                      item.id == roleTag ? COLORS.white : COLORS.loginGray5,
-                  }}
+                  style={{ color: selectedRoleTextColor(item.id) }}
                 >
                   {item.label}
                 </TagButtonText>
