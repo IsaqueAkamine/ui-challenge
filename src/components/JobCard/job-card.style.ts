@@ -1,4 +1,4 @@
-import { Feather } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { COLORS } from "../../constants/colors"; 
 
@@ -20,7 +20,7 @@ export const Title = styled.Text`
   font-size: 18px;
 `;
 
-export const LikeIcon = styled(Feather)`
+export const LikeIcon = styled(FontAwesome)`
   color: ${COLORS.searchResults.primaryText};
 `;
 

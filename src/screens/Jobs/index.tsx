@@ -5,7 +5,7 @@ import { useJob } from "../../contexts/job";
 // import JobList from "./JobList";
 
 import Header from "../../components/Header";
-import JobCard from "../../components/JobCard";
+import JobCard, { JobProps } from "../../components/JobCard";
 import FilterModal from "./FilterModal";
 import { COLORS } from "../../constants/colors";
 
@@ -65,7 +65,7 @@ function Jobs() {
         data={jobList}
         keyExtractor={(item) => `job-card-${item.id}`}
         renderItem={({ item }) => {
-          return <JobCard item={item} />;
+          return <JobCard {...item} />;
         }}
         contentContainerStyle={{
           gap: 25,

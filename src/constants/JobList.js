@@ -8,6 +8,7 @@ export default [
     location: "Remote",
     icon: "invision",
     role: 1,
+    isFavorite: true,
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export default [
     location: "San Francisco",
     icon: "notion",
     role: 2,
+    isFavorite: false,
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ export default [
     location: "San Francisco",
     icon: "snapchat",
     role: 1,
+    isFavorite: false,
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ export default [
     location: "Remote",
     icon: "invision",
     role: 1,
+    isFavorite: false,
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ export default [
     location: "Remote",
     icon: "invision",
     role: 3,
+    isFavorite: false,
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ export default [
     location: "San Francisco",
     icon: "snapchat",
     role: 5,
+    isFavorite: false,
   },
   {
     id: 7,
@@ -68,5 +74,6 @@ export default [
     location: "San Francisco",
     icon: "notion",
     role: 6,
+    isFavorite: false,
   },
 ];

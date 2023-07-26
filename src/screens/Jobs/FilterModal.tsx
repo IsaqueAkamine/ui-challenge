@@ -28,7 +28,7 @@ import {
 
 interface FilterModalProps {
   isVisible: boolean;
-  onClose: () => undefined;
+  onClose: () => void;
 }
 
 function FilterModal({ isVisible, onClose }: FilterModalProps) {

@@ -46,7 +46,11 @@ export const JobProvider: React.FC<Props> = ({ children }) => {
       roleListSelected.includes(item.role)
     );
 
-    setJobList(filteredList);
+    if (roleListSelected.length > 0) {
+      setJobList(filteredList);
+    } else {
+      setJobList(JobList);
+    }
   }
 
   return (
