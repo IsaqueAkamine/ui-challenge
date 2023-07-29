@@ -39,7 +39,7 @@ function Jobs() {
     return (
       <TitleContainer>
         <Title>Product Designers</Title>
-        <JobsFoundText>32 job founds</JobsFoundText>
+        <JobsFoundText>{jobList.length} job founds</JobsFoundText>
       </TitleContainer>
     );
   }
