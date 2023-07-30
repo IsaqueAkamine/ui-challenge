@@ -3,6 +3,8 @@ import GitHubUserScreen from "./GitHubUser";
 import HomeScreen from "./HomeScreen";
 import Jobs from "./Jobs";
 import Login from "./Login";
+import Map from "./Map/Map";
+import MapSearch from "./Map/MapSearch";
 import ProfileScreen from "./Profile";
 import Responsivity from "./Responsivity";
 import SearchResults from "./SearchResults";
@@ -14,6 +16,8 @@ export {
   HomeScreen,
   Jobs,
   Login,
+  Map,
+  MapSearch,
   ProfileScreen,
   Responsivity,
   SearchResults,
