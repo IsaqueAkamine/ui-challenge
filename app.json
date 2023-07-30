@@ -14,6 +14,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "updates": {
+      "url": "https://u.expo.dev/066b9304-0cbc-4192-a041-3295432a4da9"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.akamine.uichallenge",
@@ -22,6 +28,7 @@
       }
     },
     "android": {
+      "package": "com.akamine.uichallenge",      
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
