@@ -5,7 +5,7 @@ import { useJob } from "../../contexts/job";
 // import JobList from "./JobList";
 
 import Header from "../../components/Header";
-import JobCard, { JobProps } from "../../components/JobCard";
+import JobCard from "../../components/JobCard";
 import FilterModal from "./FilterModal";
 import { COLORS } from "../../constants/colors";
 

@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { JobProps } from "../../constants/commonTypes";
 
 import {
   CompanyContainer,
@@ -19,18 +22,8 @@ import {
   Title,
 } from "./job-card.style";
 
-export interface JobProps {
-  id: number;
-  title: string;
-  experience: string;
-  salary: string;
-  companyName: string;
-  location: string;
-  icon: string;
-  isFavorite: boolean;
-}
-
 function JobCard(cardItem: JobProps) {
+  const navigation = useNavigation();
   const [card, setCard] = useState<JobProps>(cardItem);
 
   const invisionIcon = require("../../assets/images/SearchResults/invision.png");
@@ -46,6 +39,7 @@ function JobCard(cardItem: JobProps) {
     location,
     icon,
     isFavorite,
+    toLoc,
   } = card;
 
   function handleCompanyLogo(icon: string) {
@@ -68,39 +62,45 @@ function JobCard(cardItem: JobProps) {
     }));
   }
 
+  function handleNavigateToJobMap() {
+    navigation.navigate("Map", { toLoc: toLoc });
+  }
+
   return (
     <Container>
       {/* TITLE/LIKE */}
-      <HeaderCard>
-        <Title>{title}</Title>
-        <LikeIcon
-          name={isFavorite ? "heart" : "heart-o"}
-          size={24}
-          onPress={() => handleToggleFavorite()}
-        />
-      </HeaderCard>
+      <Pressable onPress={handleNavigateToJobMap}>
+        <HeaderCard>
+          <Title>{title}</Title>
+          <LikeIcon
+            name={isFavorite ? "heart" : "heart-o"}
+            size={24}
+            onPress={() => handleToggleFavorite()}
+          />
+        </HeaderCard>
 
-      {/* EXPERIENCE/SALARY */}
-      <ExperienceContainer>
-        <ExperienceTextContainer>
-          <ExperienceText>Experience: {experience}</ExperienceText>
-        </ExperienceTextContainer>
-        <SalaryText>{salary}</SalaryText>
-      </ExperienceContainer>
-      {/* COMPANY DESCRIPTION */}
-      <CompanyContainer>
-        <LogoContainer>
-          <LogoImg source={handleCompanyLogo(icon)} />
-        </LogoContainer>
+        {/* EXPERIENCE/SALARY */}
+        <ExperienceContainer>
+          <ExperienceTextContainer>
+            <ExperienceText>Experience: {experience}</ExperienceText>
+          </ExperienceTextContainer>
+          <SalaryText>{salary}</SalaryText>
+        </ExperienceContainer>
+        {/* COMPANY DESCRIPTION */}
+        <CompanyContainer>
+          <LogoContainer>
+            <LogoImg source={handleCompanyLogo(icon)} />
+          </LogoContainer>
 
-        <CompanyInfoContainer>
-          <CompanyName>{companyName}</CompanyName>
-          <CompanyLocationContainer>
-            <PinIcon name={"map-pin"} size={24} />
-            <CompanyLocation>{location}</CompanyLocation>
-          </CompanyLocationContainer>
-        </CompanyInfoContainer>
-      </CompanyContainer>
+          <CompanyInfoContainer>
+            <CompanyName>{companyName}</CompanyName>
+            <CompanyLocationContainer>
+              <PinIcon name={"map-pin"} size={24} />
+              <CompanyLocation>{location}</CompanyLocation>
+            </CompanyLocationContainer>
+          </CompanyInfoContainer>
+        </CompanyContainer>
+      </Pressable>
     </Container>
   );
 }

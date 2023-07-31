@@ -16,7 +16,7 @@ function MapSearch() {
   const image = require("../../../assets/images/Map/party-map.png");
 
   function handleNavigateToMap() {
-    navigation.navigate("Map");
+    navigation.navigate("Map1");
   }
 
   return (

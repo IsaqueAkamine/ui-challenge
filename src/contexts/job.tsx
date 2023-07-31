@@ -1,21 +1,11 @@
 import React, { createContext, useContext, useState } from "react";
 import JobList from "../constants/JobList";
-
-interface JobListData {
-  id: number;
-  title: string;
-  experience: string;
-  salary: string;
-  companyName: string;
-  location: string;
-  icon: string;
-  role: number;
-}
+import { JobProps } from "../constants/commonTypes";
 
 interface JobContextData {
   roleListSelected: Array<number>;
   changeRoleListSelected: (id: number) => void;
-  jobList: Array<JobListData>;
+  jobList: Array<JobProps>;
   filterJobByRole: () => void;
 }
 
@@ -27,8 +17,8 @@ export const JobContext = createContext<JobContextData>({} as JobContextData);
 
 export const JobProvider: React.FC<Props> = ({ children }) => {
   const [roleListSelected, setRoleListSelected] = useState<number[]>([]);
-  const [jobList, setJobList] = useState<JobListData[]>(JobList);
-  const [jobListOriginal, _] = useState<JobListData[]>(JobList);
+  const [jobList, setJobList] = useState<JobProps[]>(JobList);
+  const [jobListOriginal, _] = useState<JobProps[]>(JobList);
 
   function changeRoleListSelected(id: number) {
     const newRole = !!!roleListSelected.find((item) => item == id);

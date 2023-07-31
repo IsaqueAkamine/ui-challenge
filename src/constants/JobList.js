@@ -1,17 +1,7 @@
 export default [
+  
   {
     id: 1,
-    title: "Senior Product Designers",
-    experience: "2 yrs",
-    salary: "$80 - $120K/ year",
-    companyName: "InVision",
-    location: "Remote",
-    icon: "invision",
-    role: 1,
-    isFavorite: true,
-  },
-  {
-    id: 2,
     title: "UI/UX Designers",
     experience: "3 yrs",
     salary: "$120 - $160K/ year",
@@ -20,6 +10,25 @@ export default [
     icon: "notion",
     role: 2,
     isFavorite: false,
+    toLoc: {
+      latitude: 37.7602363,
+      longitude: -122.413467,
+    },
+  },
+  {
+    id: 2,
+    title: "Senior Product Designers",
+    experience: "2 yrs",
+    salary: "$80 - $120K/ year",
+    companyName: "InVision",
+    location: "Remote",
+    icon: "invision",
+    role: 1,
+    isFavorite: true,
+    toLoc: {
+      latitude: 40.7423375,
+      longitude: -73.9879508,
+    },
   },
   {
     id: 3,
@@ -27,10 +36,14 @@ export default [
     experience: "1 yrs",
     salary: "$70 - $100K/ year",
     companyName: "SnapChat",
-    location: "San Francisco",
+    location: "Santa Monica",
     icon: "snapchat",
     role: 1,
     isFavorite: false,
+    toLoc: {
+      latitude: 34.0160185,
+      longitude: -118.4543987,
+    },
   },
   {
     id: 4,
@@ -42,6 +55,10 @@ export default [
     icon: "invision",
     role: 1,
     isFavorite: false,
+    toLoc: {
+      latitude: 40.7423375,
+      longitude: -73.9879508,
+    },
   },
   {
     id: 5,
@@ -53,6 +70,10 @@ export default [
     icon: "invision",
     role: 3,
     isFavorite: false,
+    toLoc: {
+      latitude: 40.7423375,
+      longitude: -73.9879508,
+    },
   },
   {
     id: 6,
@@ -60,10 +81,14 @@ export default [
     experience: "5 yrs",
     salary: "$110 - $140K/ year",
     companyName: "SnapChat",
-    location: "San Francisco",
+    location: "Santa Monica",
     icon: "snapchat",
     role: 5,
     isFavorite: false,
+    toLoc: {
+      latitude: 34.0160185,
+      longitude: -118.4543987,
+    },
   },
   {
     id: 7,
@@ -75,5 +100,9 @@ export default [
     icon: "notion",
     role: 6,
     isFavorite: false,
+    toLoc: {
+      latitude: 37.7602363,
+      longitude: -122.413467,
+    },
   },
 ];

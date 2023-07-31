@@ -12,7 +12,7 @@ export default function MapStack() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="MapSearch" component={MapSearch} />
-      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="Map1" component={Map} />
     </Stack.Navigator>
   );
 }
