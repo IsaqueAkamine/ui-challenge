@@ -104,7 +104,7 @@ export default function GitHubUserScreen() {
 
   return (
     <Container>
-      <Header iconColor="#405572" conteinerStyle={{ marginTop: 14 }} />
+      <Header iconColor="#405572" containerStyle={{ marginTop: 14 }} />
       <Image
         source={{ uri: userData?.avatar_url }}
         style={{ resizeMode: "contain" }}

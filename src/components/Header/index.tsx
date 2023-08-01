@@ -5,7 +5,7 @@ import { BackButton, Container, Title } from "./header.style";
 
 interface HeaderProps {
   iconColor?: string;
-  conteinerStyle?: ViewStyle;
+  containerStyle?: ViewStyle;
   title?: string;
   titleStyle?: TextStyle;
   rightButton?: () => {};
@@ -13,7 +13,7 @@ interface HeaderProps {
 
 export default function Header({
   iconColor = "#FFF",
-  conteinerStyle,
+  containerStyle,
   title,
   titleStyle,
   rightButton,
@@ -29,7 +29,7 @@ export default function Header({
   }
 
   return (
-    <Container style={{ ...conteinerStyle }}>
+    <Container style={{ ...containerStyle }}>
       <BackButton onPress={handleBackNavigation}>
         <Feather name="arrow-left" size={24} color={iconColor} />
       </BackButton>

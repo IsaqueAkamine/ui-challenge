@@ -17,7 +17,7 @@ export default function ProfileScreen() {
   const image = require("../../assets/images/profile-img.jpg");
   return (
     <Container>
-      <Header iconColor="#405572" conteinerStyle={{ marginTop: 14 }} />
+      <Header iconColor="#405572" containerStyle={{ marginTop: 14 }} />
       <Image source={image} style={{ resizeMode: "contain" }} />
       <UserName>John Doe</UserName>
       <UserDescription>Visual Designer and Photographer</UserDescription>

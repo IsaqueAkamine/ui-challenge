@@ -15,6 +15,10 @@
       "title": "Encontre o seu emprego perfeito",
       "description": "Milhares de empregos. Encontre a melhor empresa para suas habilidades e localização.",
       "start-button": "Comece agora"
+    },
+    "map":{
+      "travel-time": "Tempo de viagem",
+      "destination": "Seu destino"
     }
   }
 }

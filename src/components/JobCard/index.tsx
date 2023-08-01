@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { JobProps } from "../../constants/commonTypes";
+import { utils } from "../../utils";
 
 import {
   CompanyContainer,
@@ -26,10 +27,6 @@ function JobCard(cardItem: JobProps) {
   const navigation = useNavigation();
   const [card, setCard] = useState<JobProps>(cardItem);
 
-  const invisionIcon = require("../../assets/images/SearchResults/invision.png");
-  const notionIcon = require("../../assets/images/SearchResults/notion.png");
-  const snapchatIcon = require("../../assets/images/SearchResults/snapchat.png");
-
   const {
     id,
     title,
@@ -42,19 +39,6 @@ function JobCard(cardItem: JobProps) {
     toLoc,
   } = card;
 
-  function handleCompanyLogo(icon: string) {
-    switch (icon) {
-      case "invision":
-        return invisionIcon;
-      case "notion":
-        return notionIcon;
-      case "snapchat":
-        return snapchatIcon;
-      default:
-        return invisionIcon;
-    }
-  }
-
   function handleToggleFavorite() {
     setCard((prevCard) => ({
       ...prevCard,
@@ -63,7 +47,7 @@ function JobCard(cardItem: JobProps) {
   }
 
   function handleNavigateToJobMap() {
-    navigation.navigate("Map", { toLoc: toLoc });
+    navigation.navigate("Map", { company: card });
   }
 
   return (
@@ -89,7 +73,7 @@ function JobCard(cardItem: JobProps) {
         {/* COMPANY DESCRIPTION */}
         <CompanyContainer>
           <LogoContainer>
-            <LogoImg source={handleCompanyLogo(icon)} />
+            <LogoImg source={utils.handleCompanyLogo(icon)} />
           </LogoContainer>
 
           <CompanyInfoContainer>

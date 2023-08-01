@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
 import { useJob } from "../../contexts/job";
 
-// import JobList from "./JobList";
-
 import Header from "../../components/Header";
 import JobCard from "../../components/JobCard";
 import FilterModal from "./FilterModal";
@@ -39,7 +37,7 @@ function Jobs() {
     return (
       <TitleContainer>
         <Title>Product Designers</Title>
-        <JobsFoundText>{jobList.length} job founds</JobsFoundText>
+        <JobsFoundText>{jobList.length} jobs founds</JobsFoundText>
       </TitleContainer>
     );
   }
@@ -48,7 +46,7 @@ function Jobs() {
     <Container>
       <Header
         iconColor={COLORS.searchResults.buttonBack}
-        conteinerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
+        containerStyle={{ marginTop: 14, paddingHorizontal: 22 }}
         rightButton={HeaderRightButton}
       />
 

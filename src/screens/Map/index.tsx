@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+import { useTranslation } from "react-i18next";
 import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
@@ -17,15 +18,28 @@ import { utils } from "../../utils";
 import {
   BackButton,
   BackIcon,
+  CompanyContainer,
+  CompanyImage,
+  CompanyInfoContainer,
+  CompanyJobTitle,
+  CompanyName,
   Container,
+  Icon,
+  InfoContainer,
+  InfoDescription,
+  InfoText,
   MapContainer,
+  SectionContainer,
+  SectionDescriptionContainer,
   Title,
 } from "./map.style";
 
 function Map() {
+  const { t, i18n } = useTranslation();
   const mapView = useRef();
   const navigation = useNavigation();
-  const { toLoc } = useRoute().params;
+  const { company } = useRoute().params;
+  const { address, companyName, icon, title, toLoc } = company;
   const googleMapApiKey = process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY;
   const [fromLocation, setFromLocation] = useState<LocationObject | null>(null);
   const [angle, setAngle] = useState(0);
@@ -152,6 +166,34 @@ function Map() {
         ) : (
           <PermissionNotAllow />
         )}
+        <InfoContainer>
+          <SectionContainer>
+            <Icon name="clock" size={24} />
+            <SectionDescriptionContainer>
+              <InfoText>{t("map.travel-time")}</InfoText>
+              <InfoDescription>
+                {utils.calculateHourAndMinutes(duration)}
+              </InfoDescription>
+            </SectionDescriptionContainer>
+          </SectionContainer>
+          <SectionContainer>
+            <Icon name="map-pin" size={24} />
+            <SectionDescriptionContainer>
+              <InfoText>{t("map.destination")}</InfoText>
+              <InfoDescription numberOfLines={1} ellipsizeMode="tail">
+                {address}
+              </InfoDescription>
+            </SectionDescriptionContainer>
+          </SectionContainer>
+
+          <CompanyContainer>
+            <CompanyImage source={utils.handleCompanyLogo(icon)} />
+            <CompanyInfoContainer>
+              <CompanyName>{companyName}</CompanyName>
+              <CompanyJobTitle>{title}</CompanyJobTitle>
+            </CompanyInfoContainer>
+          </CompanyContainer>
+        </InfoContainer>
       </MapContainer>
     </Container>
   );
