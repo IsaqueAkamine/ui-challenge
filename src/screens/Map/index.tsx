@@ -11,8 +11,8 @@ import {
   LocationAccuracy,
 } from "expo-location";
 
-import { icons, SIZES } from "../../../constants";
-import { utils } from "../../../utils";
+import { icons, SIZES } from "../../constants";
+import { utils } from "../../utils";
 
 import {
   BackButton,

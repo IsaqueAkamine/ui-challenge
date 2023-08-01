@@ -14,7 +14,6 @@ import {
   GitHubUserScreen,
 } from "../screens";
 import { JobStack } from "./JobStack";
-import MapStack from "./MapStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -104,18 +103,6 @@ export default function DrawerMenu() {
           title: "Search Results",
           drawerIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="MapStack"
-        component={MapStack}
-        options={{
-          headerShown: false,
-          drawerLabel: "Map Search",
-          title: "Map Search",
-          drawerIcon: ({ size, color }) => (
-            <Feather name="map-pin" size={size} color={color} />
           ),
         }}
       />

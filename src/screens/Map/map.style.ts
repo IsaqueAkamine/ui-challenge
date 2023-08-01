@@ -1,8 +1,6 @@
-import { Platform, StatusBar } from "react-native";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { AntDesign } from "@expo/vector-icons";
 import styled from "styled-components/native";
-import { COLORS, SIZES } from "../../../constants";
+import { COLORS, SIZES } from "../../constants";
 
 export const Container = styled.View`
   flex: 1;
