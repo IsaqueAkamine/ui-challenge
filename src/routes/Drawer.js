@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/drawer";
 import { Image, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -12,6 +12,7 @@ import {
   ProfileScreen,
   Responsivity,
   GitHubUserScreen,
+  Movies,
 } from "../screens";
 import { JobStack } from "./JobStack";
 
@@ -21,7 +22,7 @@ export default function DrawerMenu() {
   const { t } = useTranslation();
   return (
     <Drawer.Navigator
-      initialRouteName="SearchResults"
+      initialRouteName="Movies"
       screenOptions={{ headerShown: false, unmountOnBlur: true }}
       drawerContent={(props) => {
         return (
@@ -103,6 +104,18 @@ export default function DrawerMenu() {
           title: "Search Results",
           drawerIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Movies"
+        component={Movies}
+        options={{
+          headerShown: false,
+          drawerLabel: "Movies",
+          title: "Movies",
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="local-movies" size={size} color={color} />
           ),
         }}
       />

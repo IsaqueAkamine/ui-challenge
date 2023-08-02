@@ -39,4 +39,7 @@ export const COLORS = {
     experienceText: "#D464D6",
     logoBackground: "#F7F7FF",
   },
+  movies: {
+    primary: "#06070D",
+  },
 };

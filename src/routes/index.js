@@ -3,6 +3,7 @@ import { View, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../contexts/auth";
 
+import { useFonts } from "expo-font";
 import {
   useFonts as useQuickSand,
   Quicksand_400Regular,
@@ -27,10 +28,20 @@ const Loading = () => {
 };
 
 export default function Routes() {
-  // const [loading, setLoading] = useState(true);
-  const { viewedOnboarding, hideOnboarding, authData, loading, setLoadingAppData } = useAuth();
+  const {
+    viewedOnboarding,
+    hideOnboarding,
+    authData,
+    loading,
+    setLoadingAppData,
+  } = useAuth();
 
-  let [fontsLoaded] = useQuickSand({
+  const [fontsLoaded] = useFonts({
+    "Karma-Bold": require("../assets/fonts/Karma-Bold.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+  });
+
+  let [fontsLoadedQuicksand] = useQuickSand({
     Quicksand_400Regular,
     Quicksand_700Bold,
   });
@@ -50,7 +61,7 @@ export default function Routes() {
     } catch (error) {
       console.log("Error @checkOnboarding", error);
     } finally {
-      setLoadingAppData(false)
+      setLoadingAppData(false);
     }
   };
 
@@ -58,7 +69,7 @@ export default function Routes() {
     checkOnBoarding();
   }, []);
 
-  if (!fontsLoaded || !fontsLoadedSahitya || loading) {
+  if (!fontsLoadedQuicksand || !fontsLoadedSahitya || loading) {
     return <Loading />;
   }
 
