@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
-import { getBottomSpace } from "react-native-iphone-x-helper";
-
-import apiMovies from "../../services/apiMovies";
+import { Alert, FlatList, SafeAreaView } from "react-native";
+import { useTranslation } from "react-i18next";
+import useMovies from "../../hooks/useMovies";
 import {
   AvatarImage,
   Container,
-  Description,
   FavoriteIcon,
   HeaderContainer,
   HeaderText,
@@ -20,56 +18,44 @@ import {
   VerticalMovieTitle,
 } from "./movies.styles";
 import { SIZES } from "../../constants";
+import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
+import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
 
 interface MovieProps {
   id: string;
   titleText: { text: string };
-  primaryImage: { url: string };
+  primaryImage: { url: string; caption: { plainText: string } };
   releaseYear: { year: number };
 }
 
 export default function Movies() {
   const image = require("../../assets/images/profile-img.jpg");
+  const { t } = useTranslation();
+  const { fetchData } = useMovies();
+  const abortController = new AbortController();
 
   const [popularMovieList, setPopularMovieList] = useState<MovieProps[]>([]);
-
-  const options = {
-    method: "GET",
-    // url: "https://moviesdatabase.p.rapidapi.com/titles/series/%7BseriesId%7D",
-    url: "https://moviesdatabase.p.rapidapi.com/titles",
-    params: {
-      list: "most_pop_movies",
-      sort: "year.decr",
-    },
-    headers: {
-      "X-RapidAPI-Key": process.env.EXPO_PUBLIC_RAPIDAPI_KEY,
-      "X-RapidAPI-Host": process.env.EXPO_PUBLIC_RAPIDAPI_HOST,
-    },
-  };
-
-  async function getMovies() {
-    try {
-      const response = await apiMovies.request(options);
-      console.log(response.data);
-      const { results } = response.data;
-      // console.log(results);
-      setPopularMovieList(results);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const [loadingPopularMovieList, setLoadingPopularMovieList] = useState(false);
+  const [forYouMovieList, setForYouMovieList] = useState<MovieProps[]>([]);
+  const [loadingForYouMovieList, setLoadingForYouMovieList] = useState(false);
+  const [loadingApiData, setLoadingApiData] = useState(false);
 
   function HorizontalMovies(item: MovieProps) {
     return (
       <HorizontalMovieContainer>
         <HorizontalMovieImgCover
-          source={{ uri: item.primaryImage.url }}
+          source={
+            item?.primaryImage?.url
+              ? { uri: item?.primaryImage?.url }
+              : require("../../assets/images/movie-img-cover.jpeg")
+          }
           resizeMode="cover"
         />
-        <MovieTitle numberOfLines={1} ellipsizeMode="tail">
-          {item.titleText.text}
+        <MovieTitle numberOfLines={2} ellipsizeMode="tail">
+          {item?.primaryImage?.caption?.plainText
+            ? item?.primaryImage?.caption?.plainText
+            : item.titleText.text}
         </MovieTitle>
-        <Description>genre</Description>
       </HorizontalMovieContainer>
     );
   }
@@ -83,17 +69,21 @@ export default function Movies() {
             <HeaderText>Hi, User</HeaderText>
           </HeaderContainer>
           <Title>Popular Movies</Title>
-          <FlatList
-            data={popularMovieList}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => HorizontalMovies(item)}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{
-              gap: 20,
-              paddingHorizontal: SIZES.padding,
-            }}
-          />
+          {loadingApiData ? (
+            <HorizontalMovieSkeleton />
+          ) : (
+            <FlatList
+              data={popularMovieList}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => HorizontalMovies(item)}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                gap: 20,
+                paddingHorizontal: SIZES.padding,
+              }}
+            />
+          )}
           <Title>For You</Title>
         </>
       );
@@ -102,18 +92,25 @@ export default function Movies() {
   }
 
   function VerticalMovies(item: MovieProps) {
+    if (loadingApiData) return <VerticalMovieSkeleton />;
+
     return (
       <>
         <VerticalMovieContainer>
           <VerticalMovieImgCover
-            source={{ uri: item.primaryImage.url }}
+            source={
+              item?.primaryImage?.url
+                ? { uri: item?.primaryImage?.url }
+                : require("../../assets/images/movie-img-cover.jpeg")
+            }
             resizeMode="cover"
           />
           <VerticalMovieInfoContainer>
-            <VerticalMovieTitle numberOfLines={1} ellipsizeMode="tail">
-              {item.titleText.text}
+            <VerticalMovieTitle numberOfLines={2} ellipsizeMode="tail">
+              {item?.primaryImage?.caption?.plainText
+                ? item?.primaryImage?.caption?.plainText
+                : item.titleText.text}
             </VerticalMovieTitle>
-            <Description>Genre</Description>
             {/* <Rating>{item.rating}</Rating> */}
           </VerticalMovieInfoContainer>
 
@@ -128,8 +125,65 @@ export default function Movies() {
     );
   }
 
+  async function getMoviesPopularMovies() {
+    try {
+      setLoadingPopularMovieList(true);
+      const fetch = await fetchData("/titles", {
+        params: {
+          list: "most_pop_movies",
+          sort: "year.decr",
+        },
+        signal: abortController.signal,
+      });
+      setPopularMovieList(fetch.data);
+    } catch (err: any) {
+      throw new Error(err);
+    } finally {
+      setLoadingPopularMovieList(false);
+    }
+  }
+
+  async function getMoviesForYou() {
+    try {
+      setLoadingForYouMovieList(true);
+      const fetch = await fetchData("/titles/x/upcoming", {
+        params: {
+          sort: "year.decr",
+        },
+        signal: abortController.signal,
+      });
+      setForYouMovieList(fetch.data);
+    } catch (err: any) {
+      throw new Error(err);
+    } finally {
+      setLoadingForYouMovieList(false);
+    }
+  }
+
+  function fetchMovieData() {
+    setLoadingApiData(true);
+
+    Promise.all([getMoviesPopularMovies(), getMoviesForYou()])
+      .then(() => {
+        setLoadingApiData(false);
+      })
+      .catch((error: any) => {
+        // setLoadingApiData(false);
+        Alert.alert(error.message, t("notifications.Fail to fetch data"));
+        if (abortController.signal.aborted) {
+          console.log("Data fetching cancelled");
+        } else {
+          // Handle error
+        }
+      })
+      .finally(() => {
+        setLoadingApiData(false);
+      });
+  }
+
   useEffect(() => {
-    getMovies();
+    fetchMovieData();
+    return () => abortController.abort("Data fetching cancelled");
   }, []);
 
   return (
@@ -141,7 +195,7 @@ export default function Movies() {
             ListHeaderComponentStyle={{
               marginHorizontal: -SIZES.padding,
             }}
-            data={popularMovieList}
+            data={forYouMovieList}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => VerticalMovies(item)}
             showsVerticalScrollIndicator={false}

@@ -85,6 +85,7 @@ export const VerticalMovieImgCover = styled.Image`
 export const VerticalMovieInfoContainer = styled.View`
   flex: 1;
   margin-left: 22px;
+  margin-right: 22px;
 `;
 
 export const VerticalMovieTitle = styled.Text`
