@@ -1,3 +1,5 @@
+import { GenreProps } from "../constants/movieTypes";
+
 function calculateAngle(coordinates) {
   let startLat = coordinates[0]["latitude"];
   let startLng = coordinates[0]["longitude"];
@@ -41,10 +43,20 @@ function calculateHourAndMinutes(minutes) {
   return `${textMinutes}`;
 }
 
+function renderGenres(genres: GenreProps[]) {
+  if (genres.length <= 0) return "";
+  const genreList = genres.map((item, index, arr) => {
+    if (arr.length - 1 === index) return `${item.text}`;
+    return `${item.text}, `;
+  });
+  return genreList;
+}
+
 const utils = {
   calculateAngle,
   handleCompanyLogo,
   calculateHourAndMinutes,
+  renderGenres,
 };
 
 export default utils;

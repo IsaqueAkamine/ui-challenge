@@ -12,9 +12,9 @@ import {
   ProfileScreen,
   Responsivity,
   GitHubUserScreen,
-  Movies,
 } from "../screens";
 import { JobStack } from "./JobStack";
+import MovieStack from "./MovieStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -108,12 +108,12 @@ export default function DrawerMenu() {
         }}
       />
       <Drawer.Screen
-        name="Movies"
-        component={Movies}
+        name="MovieStack"
+        component={MovieStack}
         options={{
           headerShown: false,
-          drawerLabel: "Movies",
-          title: "Movies",
+          drawerLabel: "MovieStack",
+          title: "MovieStack",
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="local-movies" size={size} color={color} />
           ),

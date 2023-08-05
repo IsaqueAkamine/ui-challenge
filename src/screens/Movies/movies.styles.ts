@@ -2,9 +2,7 @@ import { Platform, StatusBar } from "react-native";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { COLORS, SIZES } from "../../constants";
-import {
-  getStatusBarHeight,
-} from "react-native-iphone-x-helper";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
@@ -53,7 +51,7 @@ export const Description = styled.Text`
   font-size: 14px;
 `;
 
-export const HorizontalMovieContainer = styled.View`
+export const HorizontalMovieContainer = styled.TouchableOpacity`
   width: 130px;
   /* padding-left: ${SIZES.padding}px; */
   /* padding-right: ${SIZES.padding}px; */
@@ -72,7 +70,7 @@ export const MovieTitle = styled.Text`
   font-size: 16px;
 `;
 
-export const VerticalMovieContainer = styled.View`
+export const VerticalMovieContainer = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
