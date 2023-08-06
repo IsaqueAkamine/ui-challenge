@@ -100,7 +100,7 @@ export default function DrawerMenu() {
         component={JobStack}
         options={{
           headerShown: false,
-          drawerLabel: "Search Results",
+          drawerLabel: "Find a job",
           title: "Search Results",
           drawerIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
@@ -112,7 +112,7 @@ export default function DrawerMenu() {
         component={MovieStack}
         options={{
           headerShown: false,
-          drawerLabel: "MovieStack",
+          drawerLabel: "Movies",
           title: "MovieStack",
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="local-movies" size={size} color={color} />

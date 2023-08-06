@@ -9,4 +9,5 @@ export interface MovieProps {
   releaseYear: { year: number };
   genres: { genres: GenreProps[] };
   ratingsSummary: { aggregateRating: number };
+  plot: { plotText: { plainText: string } };
 }

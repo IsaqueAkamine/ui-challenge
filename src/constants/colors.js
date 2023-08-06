@@ -45,5 +45,7 @@ export const COLORS = {
   },
   movies: {
     primary: "#06070D",
+    background: "#FDFDFD",
+    actionButton: "#2979FF",
   },
 };

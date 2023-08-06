@@ -21,7 +21,7 @@ import {
 } from "./movies.styles";
 import { SIZES } from "../../constants";
 import { utils } from "../../utils";
-import { MovieProps } from "../../constants/movieTypes";
+import { MovieProps } from "../../interfaces/movieTypes";
 import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
 import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
 

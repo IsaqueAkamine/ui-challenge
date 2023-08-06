@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { JobProps } from "../../constants/commonTypes";
+import { JobProps } from "../../interfaces/commonTypes";
 import { utils } from "../../utils";
 
 import {

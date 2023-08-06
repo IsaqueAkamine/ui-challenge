@@ -1,4 +1,4 @@
-import { GenreProps } from "../constants/movieTypes";
+import { GenreProps } from "../interfaces/movieTypes";
 
 function calculateAngle(coordinates) {
   let startLat = coordinates[0]["latitude"];

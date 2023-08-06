@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import JobList from "../constants/JobList";
-import { JobProps } from "../constants/commonTypes";
+import { JobProps } from "../interfaces/commonTypes";
 
 interface JobContextData {
   roleListSelected: Array<number>;
