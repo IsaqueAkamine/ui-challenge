@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, SafeAreaView } from "react-native";
+import { Alert, FlatList, SafeAreaView, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import useMovies from "../../hooks/useMovies";
@@ -34,11 +34,19 @@ export default function Movies() {
   const abortController = new AbortController();
 
   const [popularMovieList, setPopularMovieList] = useState<MovieProps[]>([]);
-  const [forYouMovieList, setForYouMovieList] = useState<MovieProps[]>([]);
+  const [upcomingMovieList, setUpcomingMovieList] = useState<MovieProps[]>([]);
   const [loadingApiData, setLoadingApiData] = useState(false);
 
   function HandleNavigateToMovieDetails(item: MovieProps) {
     navigation.navigate("MovieDetails", { movie: { ...item } });
+  }
+
+  function NoContent() {
+    return (
+      <View>
+        <Text>No content</Text>
+      </View>
+    );
   }
 
   function HorizontalMovies(item: MovieProps) {
@@ -65,34 +73,32 @@ export default function Movies() {
   }
 
   function HeaderMovies() {
-    if (popularMovieList) {
-      return (
-        <>
-          <HeaderContainer>
-            <AvatarImage source={image} style={{ resizeMode: "center" }} />
-            <HeaderText>Hi, User</HeaderText>
-          </HeaderContainer>
-          <Title>Popular Movies</Title>
-          {loadingApiData ? (
-            <HorizontalMovieSkeleton />
-          ) : (
-            <FlatList
-              data={popularMovieList}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => HorizontalMovies(item)}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                gap: 20,
-                paddingHorizontal: SIZES.padding,
-              }}
-            />
-          )}
-          <Title>For You</Title>
-        </>
-      );
-    }
-    return <></>;
+    return (
+      <>
+        <HeaderContainer>
+          <AvatarImage source={image} style={{ resizeMode: "center" }} />
+          <HeaderText>Hi, John Doe</HeaderText>
+        </HeaderContainer>
+        <Title>Popular Movies</Title>
+        {loadingApiData ? (
+          <HorizontalMovieSkeleton />
+        ) : (
+          <FlatList
+            ListEmptyComponent={NoContent}
+            data={popularMovieList}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => HorizontalMovies(item)}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              gap: 20,
+              paddingHorizontal: SIZES.padding,
+            }}
+          />
+        )}
+        <Title>Upcoming Movies</Title>
+      </>
+    );
   }
 
   function VerticalMovies(item: MovieProps) {
@@ -148,16 +154,17 @@ export default function Movies() {
     }
   }
 
-  async function getMoviesForYou() {
+  async function getMoviesUpcoming() {
     try {
       const fetch = await fetchData("/titles/x/upcoming", {
         params: {
           sort: "year.decr",
+          year: `${new Date().getFullYear()}`,
           info: "base_info",
         },
         signal: abortController.signal,
       });
-      setForYouMovieList(fetch.data);
+      setUpcomingMovieList(fetch.data);
     } catch (err: any) {
       throw new Error(err);
     }
@@ -166,7 +173,7 @@ export default function Movies() {
   function fetchMovieData() {
     setLoadingApiData(true);
 
-    Promise.all([getMoviesPopularMovies(), getMoviesForYou()])
+    Promise.all([getMoviesPopularMovies(), getMoviesUpcoming()])
       .then(() => {
         setLoadingApiData(false);
       })
@@ -193,11 +200,12 @@ export default function Movies() {
       <SafeAreaView style={{ flex: 1 }}>
         {popularMovieList && (
           <FlatList
+            ListEmptyComponent={NoContent}
             ListHeaderComponent={HeaderMovies}
             ListHeaderComponentStyle={{
               marginHorizontal: -SIZES.padding,
             }}
-            data={forYouMovieList}
+            data={upcomingMovieList}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => VerticalMovies(item)}
             showsVerticalScrollIndicator={false}
