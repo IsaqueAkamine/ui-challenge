@@ -24,6 +24,7 @@ import { utils } from "../../utils";
 import { MovieProps } from "../../interfaces/movieTypes";
 import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
 import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 
 export default function Movies() {
   const image = require("../../assets/images/profile-img.jpg");
@@ -204,6 +205,7 @@ export default function Movies() {
               flexGrow: 1,
               gap: 29,
               marginHorizontal: SIZES.padding,
+              paddingBottom: 72 + getBottomSpace(),
             }}
           />
         )}
