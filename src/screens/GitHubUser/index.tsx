@@ -89,6 +89,30 @@ export default function GitHubUserScreen() {
       });
   }
 
+  function UserInfo() {
+    return (
+      <>
+        <Image
+          source={{ uri: userData?.avatar_url }}
+          style={{ resizeMode: "contain" }}
+        />
+        <UserName>{userData?.name}</UserName>
+        <UserDescription>{userData?.bio}</UserDescription>
+        <UserLocation>{userData?.location}</UserLocation>
+
+        <FollowButton>
+          <FollowButtonText>Follow</FollowButtonText>
+        </FollowButton>
+
+        <UserDataContainer>
+          <UserData title="Repositories" value={userData?.public_repos || 0} />
+          <UserData title="Followers" value={userData?.followers || 0} />
+          <UserData title="Following" value={userData?.following || 0} />
+        </UserDataContainer>
+      </>
+    );
+  }
+
   useEffect(() => {
     fetchUserData();
     return () => abortController.abort("Data fetching cancelled");
@@ -105,27 +129,11 @@ export default function GitHubUserScreen() {
   return (
     <Container>
       <Header iconColor="#405572" containerStyle={{ marginTop: 14 }} />
-      <Image
-        source={{ uri: userData?.avatar_url }}
-        style={{ resizeMode: "contain" }}
-      />
-      <UserName>{userData?.name}</UserName>
-      <UserDescription>{userData?.bio}</UserDescription>
-      <UserLocation>{userData?.location}</UserLocation>
-
-      <FollowButton>
-        <FollowButtonText>Follow</FollowButtonText>
-      </FollowButton>
-
-      <UserDataContainer>
-        <UserData title="Repositories" value={userData?.public_repos || 0} />
-        <UserData title="Followers" value={userData?.followers || 0} />
-        <UserData title="Following" value={userData?.following || 0} />
-      </UserDataContainer>
 
       {userRepos && (
         <FlatList
-          style={{ marginTop: 24 }}
+          ListHeaderComponent={UserInfo}
+          ListHeaderComponentStyle={{ marginBottom: 24 }}
           data={userRepos}
           renderItem={({ item }) => <UserRepositories {...item} />}
           showsVerticalScrollIndicator={false}
