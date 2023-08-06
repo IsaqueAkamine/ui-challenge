@@ -34,7 +34,7 @@ function calculateHourAndMinutes(minutes) {
 
   const textHours = hours > 1 ? `${hours} hours` : `${hours} hour`;
   const textMinutes =
-    minutesLeft > 1 ? `${minutesLeft} minutos` : `${minutesLeft} minuto`;
+    minutesLeft > 1 ? `${minutesLeft} minutes` : `${minutesLeft} minute`;
 
   if (hours > 0) {
     return `${textHours} and ${textMinutes}`;
