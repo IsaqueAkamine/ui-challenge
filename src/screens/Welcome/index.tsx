@@ -34,7 +34,13 @@ export default function Welcome() {
       />
       <ActionButtonsContainer>
         <ButtonsContainer>
-          <RegistrationButton description="Sign up" dark />
+          <RegistrationButton
+            description="Sign up"
+            dark
+            onPress={() => {
+              handleNavigate("SignUp");
+            }}
+          />
           <RegistrationButton
             description="Login"
             onPress={() => {

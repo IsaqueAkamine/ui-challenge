@@ -12,7 +12,12 @@ export default function Input({ description, inputProps }: InputProps) {
   return (
     <Container>
       <Description>{description}</Description>
-      <InputStyled {...inputProps} placeholderTextColor={COLORS.loginInput} />
+      <InputStyled
+        {...inputProps}
+        placeholderTextColor={COLORS.loginInput}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
     </Container>
   );
 }

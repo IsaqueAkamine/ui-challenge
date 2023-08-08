@@ -1,8 +1,6 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-import { useAuth } from "../../contexts/auth";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import RegistrationButton from "../../components/RegistrationButton";
@@ -17,24 +15,38 @@ import {
   HaveAccountText,
   SafeArea,
   Title,
-} from "./login.style";
+} from "./styles";
 
-export default function Login() {
+export default function SignUp(): React.ReactNode {
   const navigation = useNavigation();
-  const { signIn } = useAuth();
-  // const [email, setEmail]
+
+  let username = "";
   let email = "";
   let password = "";
+
+  function handleUsername(value: string) {
+    username = value;
+  }
 
   function handleEmail(value: string) {
     email = value;
   }
+
   function handlePassword(value: string) {
     password = value;
   }
 
-  function handleLogin() {
-    signIn(email, password);
+  function createAccount() {
+    let error = "";
+    if (username.trim().length < 3) error = "Invalid user";
+    else if (email.trim().length < 3) error = "Invalid email";
+    else if (password.trim().length < 3) error = "Invalid password";
+
+    if (error.length > 0) {
+      return Alert.alert("Error", error);
+    }
+
+    console.log("CREATE ACCOUNT");
   }
 
   function handleNavigate(route: string) {
@@ -46,10 +58,19 @@ export default function Login() {
       <Container>
         <StatusBar barStyle={"light-content"} />
         <Header />
-        <Title>Let’s sign you in.</Title>
-        <Description>Welcome back</Description>
-        <Description>You’ve been missed!</Description>
+        <Title>Creating account.</Title>
+        <Description>Welcome</Description>
+        <Description>Please fill in the fields!</Description>
         <Form>
+          <Input
+            description="Username"
+            inputProps={{
+              placeholder: "username",
+              onChangeText: (text) => {
+                handleUsername(text);
+              },
+            }}
+          />
           <Input
             description="Your Email"
             inputProps={{
@@ -72,11 +93,14 @@ export default function Login() {
           />
         </Form>
         <Footer>
-          <RegistrationButton onPress={handleLogin} description="Login" />
+          <RegistrationButton
+            onPress={createAccount}
+            description="Create account"
+          />
           <HaveAccountContainer>
-            <HaveAccountText>Do you have an account?</HaveAccountText>
-            <HaveAccountButton onPress={() => handleNavigate("SignUp")}>
-              <HaveAccountSignUp>Sign up</HaveAccountSignUp>
+            <HaveAccountText>Already have an account?</HaveAccountText>
+            <HaveAccountButton onPress={() => handleNavigate("Login")}>
+              <HaveAccountSignUp>Login</HaveAccountSignUp>
             </HaveAccountButton>
           </HaveAccountContainer>
         </Footer>

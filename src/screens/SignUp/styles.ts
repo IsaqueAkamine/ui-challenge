@@ -18,22 +18,14 @@ export const Title = styled.Text`
   color: ${COLORS.loginTitle};
   font-family: "Sahitya_700Bold";
   font-size: 42px;
-  /* line-height: 100%; */
   letter-spacing: -0.42px;
-
-  /* text-align: center;
-  padding: 0 90px;
-  letter-spacing: 0.52px;
-  margin: 50px 0 0 0; */
 `;
 
 export const Description = styled.Text`
   color: ${COLORS.loginGray5};
   font-size: 26px;
-  /* font-family: Roboto; */
   font-style: normal;
   font-weight: 400;
-  /* line-height: 144%; */
   letter-spacing: 0.26px;
 `;
 

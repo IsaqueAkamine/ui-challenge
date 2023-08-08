@@ -9,6 +9,7 @@ import Movies from "./Movies";
 import ProfileScreen from "./Profile";
 import Responsivity from "./Responsivity";
 import SearchResults from "./SearchResults";
+import SignUp from "./SignUp";
 import Welcome from "./Welcome";
 
 export {
@@ -23,5 +24,6 @@ export {
   ProfileScreen,
   Responsivity,
   SearchResults,
+  SignUp,
   Welcome,
 };
