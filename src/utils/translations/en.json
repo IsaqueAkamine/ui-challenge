@@ -3,6 +3,26 @@
     "routes":{
       "Home": "Home"
     },
+    "authentication": {
+      "invalid": {
+        "user": "Invalid user",
+        "email": "Invalid email",
+        "password": "Invalid password"
+      },
+      "signup": {
+        "title": "Creating account",
+        "description1": "Welcome",
+        "description2": "Please fill in the fields!",
+        "have-account": "Already have an account?"
+      },
+      "login": {
+        "title": "Let’s sign you in.",
+        "description1": "Welcome back",
+        "description2": "You’ve been missed!",
+        "have-account": "Don't have an account?",
+        "sign-up": "Sign up"
+      }
+    },
     "notifications": {
       "Fail to fetch data": "Could not fetch all data"
     },

@@ -16,8 +16,10 @@ import {
   SafeArea,
   Title,
 } from "./styles";
+import { useTranslation } from "react-i18next";
 
 export default function SignUp(): React.ReactNode {
+  const { t, i18n } = useTranslation();
   const navigation = useNavigation();
 
   let username = "";
@@ -58,9 +60,9 @@ export default function SignUp(): React.ReactNode {
       <Container>
         <StatusBar barStyle={"light-content"} />
         <Header />
-        <Title>Creating account.</Title>
-        <Description>Welcome</Description>
-        <Description>Please fill in the fields!</Description>
+        <Title>{t("authentication.signup.title")}</Title>
+        <Description>{t("authentication.signup.description1")}</Description>
+        <Description>{t("authentication.signup.description2")}</Description>
         <Form>
           <Input
             description="Username"
@@ -98,7 +100,7 @@ export default function SignUp(): React.ReactNode {
             description="Create account"
           />
           <HaveAccountContainer>
-            <HaveAccountText>Already have an account?</HaveAccountText>
+            <HaveAccountText>{t("authentication.signup.have-account")}</HaveAccountText>
             <HaveAccountButton onPress={() => handleNavigate("Login")}>
               <HaveAccountSignUp>Login</HaveAccountSignUp>
             </HaveAccountButton>

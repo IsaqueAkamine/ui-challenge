@@ -3,6 +3,26 @@
     "routes":{
       "Home": "Inicio"
     },
+    "authentication": {
+      "invalid": {
+        "user": "Usuário inválido",
+        "email": "E-mail inválido",
+        "password": "Senha inválida"
+      },
+      "signup": {
+        "title": "Criando conta",
+        "description1": "Bem vindo",
+        "description2": "Por favor, preencha os campos!",
+        "have-account": "Já tem uma conta?"
+      },
+      "login": {
+        "title": "Vamos fazer seu login.",
+        "description1": "Bem vindo de volta",
+        "description2": "Você fez falta!",
+        "have-account": "Não tem uma conta?",
+        "sign-up": "Cadastrar"
+      }
+    },
     "notifications": {
       "Fail to fetch data": "Não foi possível carregar todos os dados"
     },

@@ -18,8 +18,10 @@ import {
   SafeArea,
   Title,
 } from "./login.style";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
+  const { t, i18n } = useTranslation();
   const navigation = useNavigation();
   const { signIn } = useAuth();
   // const [email, setEmail]
@@ -46,9 +48,9 @@ export default function Login() {
       <Container>
         <StatusBar barStyle={"light-content"} />
         <Header />
-        <Title>Let’s sign you in.</Title>
-        <Description>Welcome back</Description>
-        <Description>You’ve been missed!</Description>
+        <Title>{t("authentication.login.title")}</Title>
+        <Description>{t("authentication.login.description1")}</Description>
+        <Description>{t("authentication.login.description2")}</Description>
         <Form>
           <Input
             description="Your Email"
@@ -74,9 +76,9 @@ export default function Login() {
         <Footer>
           <RegistrationButton onPress={handleLogin} description="Login" />
           <HaveAccountContainer>
-            <HaveAccountText>Do you have an account?</HaveAccountText>
+            <HaveAccountText>{t("authentication.login.have-account")}</HaveAccountText>
             <HaveAccountButton onPress={() => handleNavigate("SignUp")}>
-              <HaveAccountSignUp>Sign up</HaveAccountSignUp>
+              <HaveAccountSignUp>{t("authentication.login.sign-up")}</HaveAccountSignUp>
             </HaveAccountButton>
           </HaveAccountContainer>
         </Footer>
