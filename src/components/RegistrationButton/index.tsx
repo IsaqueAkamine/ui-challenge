@@ -1,16 +1,26 @@
 import React from "react";
-import { Container, Description } from "./registration.style";
+import { TouchableOpacityProps } from "react-native";
+import { Container, Description, Load } from "./registration.style";
 
-interface RegistrationButtonProps {
+interface RegistrationButtonProps extends TouchableOpacityProps {
   description: string;
   dark?: boolean;
-  onPress?: () => void;
+  isLoading?: boolean;
 }
 
-export default function RegistrationButton(props: RegistrationButtonProps) {
+export default function RegistrationButton({
+  dark,
+  description,
+  isLoading,
+  ...rest
+}: RegistrationButtonProps) {
   return (
-    <Container dark={props.dark} activeOpacity={0.7} onPress={props.onPress}>
-      <Description dark={props.dark}>{props.description}</Description>
+    <Container dark={dark} activeOpacity={0.7} {...rest}>
+      {isLoading ? (
+        <Load color={dark ? "#fff" : "#000"} />
+      ) : (
+        <Description dark={dark}>{description}</Description>
+      )}
     </Container>
   );
 }

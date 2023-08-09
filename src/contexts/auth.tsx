@@ -1,23 +1,26 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { Alert } from "react-native";
-import { authService } from "../services/authService";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  EffectCallback,
+} from "react";
+import { Unsubscribe, User, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../services/firebaseConfig";
+
 import {
   getLoggedUser,
   removeLoggedUser,
   saveLoggedUser,
 } from "../storages/AuthStorage";
-
-export interface AuthData {
-  token: string;
-  email: string;
-  name: string;
-}
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 interface AuthContextData {
   viewedOnboarding: boolean;
-  authData?: AuthData;
-  signIn: (email: string, password: string) => Promise<AuthData>;
-  signOut: () => Promise<void>;
+  user: User | null;
+  signIn: (user: User) => {};
+  logOut: () => {};
   hideOnboarding: () => void;
   loading: boolean;
   loadingApiData: boolean;
@@ -33,14 +36,15 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [authData, setAuth] = useState<AuthData>();
   const [viewedOnboarding, setViewedOnboarding] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingApiData, setLoadingApiData] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   function hideOnboarding() {
     setViewedOnboarding(true);
   }
+
   function setLoadingAppData(value: boolean) {
     setLoading(value);
   }
@@ -48,28 +52,27 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   async function loadLoggedUserFromStorage() {
     const loggedUser = await getLoggedUser();
     if (loggedUser) {
-      setAuth(JSON.parse(loggedUser));
+      setUser(JSON.parse(loggedUser));
     }
     setLoading(false);
   }
 
-  async function signIn(email: string, password: string) {
-    try {
-      const auth = await authService.signIn(email, password);
-      setAuth(auth);
-      await saveLoggedUser(JSON.stringify(auth));
-
-      return auth;
-    } catch (error: any) {
-      Alert.alert(error.message, "Tente novamente");
-    }
+  async function signIn(user: User) {
+    setUser(user);
+    await saveLoggedUser(JSON.stringify(user));
   }
 
-  async function signOut(): Promise<void> {
-    setAuth(undefined);
+  async function logOut(): Promise<void> {
+    await AsyncStorage.removeItem("@viewedOnboarding");
     await removeLoggedUser();
+    signOut(auth);
     return;
   }
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(auth, setUser);
+    return subscriber;
+  }, []);
 
   useEffect(() => {
     loadLoggedUserFromStorage();
@@ -80,9 +83,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       value={{
         viewedOnboarding,
         hideOnboarding,
-        authData,
+        user,
         signIn,
-        signOut,
+        logOut,
         loading,
         setLoadingAppData,
         loadingApiData,

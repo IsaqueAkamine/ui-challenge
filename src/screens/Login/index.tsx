@@ -1,6 +1,13 @@
-import React from "react";
-import { StatusBar } from "react-native";
+import React, { useState } from "react";
+import { Alert, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../services/firebaseConfig";
 
 import { useAuth } from "../../contexts/auth";
 import Header from "../../components/Header";
@@ -10,6 +17,9 @@ import {
   Container,
   Description,
   Footer,
+  ForgotPasswordButton,
+  ForgotPasswordContainer,
+  ForgotPasswordText,
   Form,
   HaveAccountButton,
   HaveAccountContainer,
@@ -18,25 +28,50 @@ import {
   SafeArea,
   Title,
 } from "./login.style";
-import { useTranslation } from "react-i18next";
 
 export default function Login() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const { signIn } = useAuth();
-  // const [email, setEmail]
-  let email = "";
-  let password = "";
-
-  function handleEmail(value: string) {
-    email = value;
-  }
-  function handlePassword(value: string) {
-    password = value;
-  }
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleLogin() {
-    signIn(email, password);
+    setIsLoading(true);
+    // signIn(email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // // Signed in
+        // const user = userCredential.user;
+        // // ...
+        console.log("Logged in");
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function handleForgotPassword() {
+    setIsLoading(true);
+    let error = "";
+
+    if (email.trim().length < 3) error = "Invalid email";
+
+    if (error.length > 0) {
+      setIsLoading(false);
+      return Alert.alert("Error", error);
+    }
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => Alert.alert("Forgot password", "An email has been sent"))
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   function handleNavigate(route: string) {
@@ -54,31 +89,39 @@ export default function Login() {
         <Form>
           <Input
             description="Your Email"
-            inputProps={{
-              placeholder: "name@email.com",
-              keyboardType: "email-address",
-              onChangeText: (text) => {
-                handleEmail(text);
-              },
-            }}
+            placeholder="name@email.com"
+            keyboardType="email-address"
+            onChangeText={setEmail}
           />
           <Input
             description="Your Password"
-            inputProps={{
-              placeholder: "**********",
-              secureTextEntry: true,
-              onChangeText: (text) => {
-                handlePassword(text);
-              },
-            }}
+            placeholder="**********"
+            secureTextEntry={true}
+            onChangeText={setPassword}
           />
+          <ForgotPasswordContainer>
+            <ForgotPasswordButton onPress={handleForgotPassword}>
+              <ForgotPasswordText>
+                {t("authentication.login.forgot-password")}
+              </ForgotPasswordText>
+            </ForgotPasswordButton>
+          </ForgotPasswordContainer>
         </Form>
         <Footer>
-          <RegistrationButton onPress={handleLogin} description="Login" />
+          <RegistrationButton
+            isLoading={isLoading}
+            disabled={isLoading}
+            onPress={handleLogin}
+            description="Login"
+          />
           <HaveAccountContainer>
-            <HaveAccountText>{t("authentication.login.have-account")}</HaveAccountText>
+            <HaveAccountText>
+              {t("authentication.login.have-account")}
+            </HaveAccountText>
             <HaveAccountButton onPress={() => handleNavigate("SignUp")}>
-              <HaveAccountSignUp>{t("authentication.login.sign-up")}</HaveAccountSignUp>
+              <HaveAccountSignUp>
+                {t("authentication.login.sign-up")}
+              </HaveAccountSignUp>
             </HaveAccountButton>
           </HaveAccountContainer>
         </Footer>

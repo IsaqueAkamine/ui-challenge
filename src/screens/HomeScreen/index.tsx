@@ -16,8 +16,10 @@ import {
   WelcomeContainer,
   WelcomeText,
 } from "./home.style";
+import { useAuth } from "../../contexts/auth";
 
 export default function HomeScreen() {
+  const { logOut } = useAuth();
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const { t, i18n } = useTranslation();
 
@@ -30,15 +32,6 @@ export default function HomeScreen() {
       .catch((error) => {
         console.log("Error @changeLanguage", error);
       });
-  };
-
-  const clearOnboarding = async () => {
-    try {
-      await AsyncStorage.removeItem("@viewedOnboarding");
-      await removeLoggedUser();
-    } catch (error) {
-      console.log("Error @clearItem", error);
-    }
   };
 
   return (
@@ -75,7 +68,7 @@ export default function HomeScreen() {
         <WelcomeText>{t("home.to UI Challenge app")}</WelcomeText>
       </WelcomeContainer>
 
-      <ClearButton onPress={clearOnboarding}>
+      <ClearButton onPress={() => logOut()}>
         <ClearButtonText>{t("home.Log Out")}</ClearButtonText>
       </ClearButton>
     </Container>

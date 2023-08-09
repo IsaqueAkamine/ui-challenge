@@ -21,3 +21,9 @@ export const Description = styled.Text<ButtonProps>`
   text-align: center;
   letter-spacing: 0.18px;
 `;
+
+export const Load = styled.ActivityIndicator.attrs(({ color, theme }) => ({
+  // color: theme.COLORS.white,
+  // color: "#000",
+  color: color,
+}))``;

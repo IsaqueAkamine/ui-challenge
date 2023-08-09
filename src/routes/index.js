@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useAuth } from "../contexts/auth";
 
 import { useFonts } from "expo-font";
@@ -28,13 +29,8 @@ const Loading = () => {
 };
 
 export default function Routes() {
-  const {
-    viewedOnboarding,
-    hideOnboarding,
-    authData,
-    loading,
-    setLoadingAppData,
-  } = useAuth();
+  const { viewedOnboarding, hideOnboarding, user, loading, setLoadingAppData } =
+    useAuth();
 
   const [fontsLoaded] = useFonts({
     "Karma-Bold": require("../assets/fonts/Karma-Bold.ttf"),
@@ -77,5 +73,5 @@ export default function Routes() {
     return <Onboarding />;
   }
 
-  return authData ? <AppStack /> : <AuthRoutes />;
+  return user ? <AppStack /> : <AuthRoutes />;
 }

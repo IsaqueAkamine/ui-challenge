@@ -1,19 +1,18 @@
 import React from "react";
-import { Container, Description, InputStyled } from "./input.style";
 import { TextInputProps } from "react-native";
+import { Container, Description, InputStyled } from "./input.style";
 import { COLORS } from "../../constants/colors";
 
-interface InputProps {
+interface InputProps extends TextInputProps {
   description: string;
-  inputProps: TextInputProps;
 }
 
-export default function Input({ description, inputProps }: InputProps) {
+export default function Input({ description, ...rest }: InputProps) {
   return (
     <Container>
       <Description>{description}</Description>
       <InputStyled
-        {...inputProps}
+        {...rest}
         placeholderTextColor={COLORS.loginInput}
         autoCorrect={false}
         autoCapitalize="none"

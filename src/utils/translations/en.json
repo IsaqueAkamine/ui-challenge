@@ -20,7 +20,8 @@
         "description1": "Welcome back",
         "description2": "You’ve been missed!",
         "have-account": "Don't have an account?",
-        "sign-up": "Sign up"
+        "sign-up": "Sign up",
+        "forgot-password": "Forgot password?"
       }
     },
     "notifications": {

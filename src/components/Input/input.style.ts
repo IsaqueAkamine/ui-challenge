@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { COLORS } from "../../constants/colors";
 
 export const Container = styled.View`
-  gap: 3px;
+  gap: 5px;
 `;
 
 export const Description = styled.Text`
