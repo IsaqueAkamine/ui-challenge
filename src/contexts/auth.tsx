@@ -23,6 +23,7 @@ interface AuthContextData {
   logOut: () => {};
   hideOnboarding: () => void;
   loading: boolean;
+  loadingUserData: boolean;
   loadingApiData: boolean;
   setLoadingApiData: (value: boolean) => any;
 }
@@ -39,6 +40,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [viewedOnboarding, setViewedOnboarding] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingApiData, setLoadingApiData] = useState(false);
+  const [loadingUserData, setLoadingUserData] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
   function hideOnboarding() {
@@ -63,14 +65,18 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   }
 
   async function logOut(): Promise<void> {
-    await AsyncStorage.removeItem("@viewedOnboarding");
+    // await AsyncStorage.removeItem("@viewedOnboarding");
     await removeLoggedUser();
     signOut(auth);
     return;
   }
 
   useEffect(() => {
-    const subscriber = onAuthStateChanged(auth, setUser);
+    const subscriber = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoadingUserData(false);
+    });
+
     return subscriber;
   }, []);
 
@@ -87,6 +93,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         signIn,
         logOut,
         loading,
+        loadingUserData,
         setLoadingAppData,
         loadingApiData,
         setLoadingApiData,

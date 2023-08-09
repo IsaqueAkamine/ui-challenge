@@ -29,8 +29,14 @@ const Loading = () => {
 };
 
 export default function Routes() {
-  const { viewedOnboarding, hideOnboarding, user, loading, setLoadingAppData } =
-    useAuth();
+  const {
+    viewedOnboarding,
+    hideOnboarding,
+    user,
+    loading,
+    loadingUserData,
+    setLoadingAppData,
+  } = useAuth();
 
   const [fontsLoaded] = useFonts({
     "Karma-Bold": require("../assets/fonts/Karma-Bold.ttf"),
@@ -65,7 +71,12 @@ export default function Routes() {
     checkOnBoarding();
   }, []);
 
-  if (!fontsLoadedQuicksand || !fontsLoadedSahitya || loading) {
+  if (
+    !fontsLoadedQuicksand ||
+    !fontsLoadedSahitya ||
+    loading ||
+    loadingUserData
+  ) {
     return <Loading />;
   }
 
