@@ -3,10 +3,10 @@ import React, {
   useState,
   useContext,
   useEffect,
-  EffectCallback,
 } from "react";
-import { Unsubscribe, User, onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../services/firebaseConfig";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
+import { FIREBASE_DB, auth } from "../services/firebaseConfig";
 
 import {
   getLoggedUser,
@@ -16,9 +16,12 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
+interface UserProps extends User {
+  username?: string;
+}
 interface AuthContextData {
   viewedOnboarding: boolean;
-  user: User | null;
+  user: UserProps | null;
   signIn: (user: User) => {};
   logOut: () => {};
   hideOnboarding: () => void;
@@ -41,7 +44,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loadingApiData, setLoadingApiData] = useState(false);
   const [loadingUserData, setLoadingUserData] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserProps | null>(null);
 
   function hideOnboarding() {
     setViewedOnboarding(true);
@@ -59,7 +62,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setLoading(false);
   }
 
-  async function signIn(user: User) {
+  async function signIn(user: UserProps) {
     setUser(user);
     await saveLoggedUser(JSON.stringify(user));
   }
@@ -73,7 +76,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      onSnapshot(doc(FIREBASE_DB, `users/${user?.uid}`), (doc) => {
+        setUser({ ...user, username: doc.data().username });
+      });
+
       setLoadingUserData(false);
     });
 

@@ -3,8 +3,12 @@ import { Alert, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebaseConfig";
+import {
+  User,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { FIREBASE_DB, auth } from "../../services/firebaseConfig";
 
 import Header from "../../components/Header";
 import Input from "../../components/Input";
@@ -26,6 +30,7 @@ export default function SignUp(): React.ReactNode {
   const { t } = useTranslation();
   const navigation = useNavigation();
 
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +39,8 @@ export default function SignUp(): React.ReactNode {
     setIsLoading(true);
     let error = "";
 
-    if (email.trim().length < 3) error = "Invalid email";
+    if (username.trim().length < 3) error = "Invalid username";
+    else if (email.trim().length < 3) error = "Invalid email";
     else if (password.trim().length < 3) error = "Invalid password";
 
     if (error.length > 0) {
@@ -44,13 +50,25 @@ export default function SignUp(): React.ReactNode {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // const user = userCredential.user;
+        const user = userCredential.user;
+        createUserInformation(user);
         Alert.alert("Account", "Account successfully created!");
       })
       .catch((error) => {
         Alert.alert("Error", error.message);
       })
       .finally(() => setIsLoading(false));
+  }
+
+  async function createUserInformation(user: User) {
+    try {
+      const docRef = await setDoc(doc(FIREBASE_DB, `users/${user.uid}`), {
+        username,
+        email: user.email,
+      });
+    } catch (error) {
+      console.error("There was an error creating user information", error);
+    }
   }
 
   function handleNavigate(route: string) {
@@ -66,6 +84,11 @@ export default function SignUp(): React.ReactNode {
         <Description>{t("authentication.signup.description1")}</Description>
         <Description>{t("authentication.signup.description2")}</Description>
         <Form>
+          <Input
+            description="Your Username"
+            placeholder="Username"
+            onChangeText={setUsername}
+          />
           <Input
             description="Your Email"
             placeholder="name@email.com"

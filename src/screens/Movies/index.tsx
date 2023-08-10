@@ -25,12 +25,14 @@ import { MovieProps } from "../../interfaces/movieTypes";
 import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
 import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+import { useAuth } from "../../contexts/auth";
 
 export default function Movies() {
   const image = require("../../assets/images/profile-img.jpg");
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { fetchData } = useMovies();
+  const { user } = useAuth();
   const abortController = new AbortController();
 
   const [popularMovieList, setPopularMovieList] = useState<MovieProps[]>([]);
@@ -77,7 +79,7 @@ export default function Movies() {
       <>
         <HeaderContainer>
           <AvatarImage source={image} style={{ resizeMode: "center" }} />
-          <HeaderText>Hi, John Doe</HeaderText>
+          <HeaderText>Hi, {user?.username}</HeaderText>
         </HeaderContainer>
         <Title>Popular Movies</Title>
         {loadingApiData ? (
