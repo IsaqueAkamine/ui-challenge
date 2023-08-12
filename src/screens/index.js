@@ -4,6 +4,7 @@ import HomeScreen from "./HomeScreen";
 import Jobs from "./Jobs";
 import Login from "./Login";
 import Map from "./Map";
+import Message from "./Message";
 import MovieDetails from "./Movies/MovieDetails";
 import Movies from "./Movies";
 import ProfileScreen from "./Profile";
@@ -19,6 +20,7 @@ export {
   Jobs,
   Login,
   Map,
+  Message,
   MovieDetails,
   Movies,
   ProfileScreen,

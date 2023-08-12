@@ -12,6 +12,7 @@ import {
   ProfileScreen,
   Responsivity,
   GitHubUserScreen,
+  Message,
 } from "../screens";
 import { JobStack } from "./JobStack";
 import MovieStack from "./MovieStack";
@@ -116,6 +117,18 @@ export default function DrawerMenu() {
           title: "MovieStack",
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="local-movies" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Message"
+        component={Message}
+        options={{
+          headerShown: false,
+          drawerLabel: "Message",
+          title: "Message",
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="message" size={size} color={color} />
           ),
         }}
       />
