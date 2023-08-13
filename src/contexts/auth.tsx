@@ -1,12 +1,6 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
-import { FIREBASE_DB, auth } from "../services/firebaseConfig";
+import { auth } from "../services/firebaseConfig";
 
 import {
   getLoggedUser,
@@ -76,10 +70,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, (user) => {
-      onSnapshot(doc(FIREBASE_DB, `users/${user?.uid}`), (doc) => {
-        setUser({ ...user, username: doc.data().username });
-      });
-
+      if (user) {
+        setUser(user);
+      }
       setLoadingUserData(false);
     });
 

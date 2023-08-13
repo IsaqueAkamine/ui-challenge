@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import {
   User,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { FIREBASE_DB, auth } from "../../services/firebaseConfig";
@@ -31,6 +32,7 @@ export default function SignUp(): React.ReactNode {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState("");
+  const [imageURL, setImageURL] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -51,8 +53,23 @@ export default function SignUp(): React.ReactNode {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        createUserInformation(user);
-        Alert.alert("Account", "Account successfully created!");
+        // createUserInformation(user);
+        // Alert.alert("Account", "Account successfully created!");
+
+        updateProfile(user, {
+          displayName: username,
+          photoURL: imageURL
+            ? imageURL
+            : "https://img.freepik.com/free-icon/user_318-159711.jpg",
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
       })
       .catch((error) => {
         Alert.alert("Error", error.message);
@@ -85,21 +102,26 @@ export default function SignUp(): React.ReactNode {
         <Description>{t("authentication.signup.description2")}</Description>
         <Form>
           <Input
-            description="Your Username"
-            placeholder="Username"
+            description="Enter your name"
+            placeholder="Name"
             onChangeText={setUsername}
           />
           <Input
-            description="Your Email"
+            description="Enter your email"
             placeholder="name@email.com"
             keyboardType="email-address"
             onChangeText={setEmail}
           />
           <Input
-            description="Your Password"
+            description="Enter your password"
             placeholder="**********"
             secureTextEntry={true}
             onChangeText={setPassword}
+          />
+          <Input
+            description="Enter your profile url"
+            placeholder="Profile URL"
+            onChangeText={setImageURL}
           />
         </Form>
         <Footer>
