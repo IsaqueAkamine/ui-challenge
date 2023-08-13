@@ -70,9 +70,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      }
+      setUser(user);
       setLoadingUserData(false);
     });
 

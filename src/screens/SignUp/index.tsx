@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import {
-  User,
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
@@ -51,41 +50,28 @@ export default function SignUp(): React.ReactNode {
     }
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
-        // createUserInformation(user);
-        // Alert.alert("Account", "Account successfully created!");
+        const profileImageUrl = imageURL
+          ? imageURL
+          : "https://img.freepik.com/free-icon/user_318-159711.jpg";
 
-        updateProfile(user, {
+        await updateProfile(user, {
           displayName: username,
-          photoURL: imageURL
-            ? imageURL
-            : "https://img.freepik.com/free-icon/user_318-159711.jpg",
-        })
-          .then(() => {
-            // Profile updated!
-            // ...
-          })
-          .catch((error) => {
-            // An error occurred
-            // ...
-          });
+          photoURL: profileImageUrl,
+        });
+
+        await setDoc(doc(FIREBASE_DB, `users`, user.uid), {
+          uid: user.uid,
+          displayName: username,
+          email: user.email,
+          photoURL: profileImageUrl,
+        });
       })
       .catch((error) => {
         Alert.alert("Error", error.message);
       })
       .finally(() => setIsLoading(false));
-  }
-
-  async function createUserInformation(user: User) {
-    try {
-      const docRef = await setDoc(doc(FIREBASE_DB, `users/${user.uid}`), {
-        username,
-        email: user.email,
-      });
-    } catch (error) {
-      console.error("There was an error creating user information", error);
-    }
   }
 
   function handleNavigate(route: string) {
