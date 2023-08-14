@@ -12,6 +12,16 @@ export const Container = styled.View`
 
 export const Title = styled.Text``;
 
+export const NewCardContainer = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+
+  border-width: 2px;
+  border-color: ${COLORS.lightOrange};
+  border-radius: 4px;
+  padding: 8px;
+`;
+
 export const CardContainer = styled.TouchableOpacity`
   padding: 8px 0;
   flex-direction: row;

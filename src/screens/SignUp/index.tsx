@@ -3,10 +3,7 @@ import { Alert, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { FIREBASE_DB, auth } from "../../services/firebaseConfig";
 
@@ -67,6 +64,8 @@ export default function SignUp(): React.ReactNode {
           email: user.email,
           photoURL: profileImageUrl,
         });
+
+        await setDoc(doc(FIREBASE_DB, "userChats", user.uid), {});
       })
       .catch((error) => {
         Alert.alert("Error", error.message);

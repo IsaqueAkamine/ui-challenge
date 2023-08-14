@@ -13,8 +13,6 @@ export const Button = styled.TouchableOpacity`
   height: 24px;
 `;
 
-export const Title = styled.Text``;
-
 export const Input = styled.TextInput`
   flex: 1;
   border-width: 1px;
