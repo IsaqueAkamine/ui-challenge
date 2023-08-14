@@ -16,6 +16,7 @@ import {
 } from "../screens";
 import { JobStack } from "./JobStack";
 import MovieStack from "./MovieStack";
+import ChatStack from "./ChatStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -121,12 +122,12 @@ export default function DrawerMenu() {
         }}
       />
       <Drawer.Screen
-        name="Message"
-        component={Message}
+        name="Chat"
+        component={ChatStack}
         options={{
           headerShown: false,
-          drawerLabel: "Message",
-          title: "Message",
+          drawerLabel: "Chat",
+          title: "Chat",
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="message" size={size} color={color} />
           ),

@@ -1,3 +1,4 @@
+import ChatList from "./ChatList";
 import Example from "./Example";
 import GitHubUserScreen from "./GitHubUser";
 import HomeScreen from "./HomeScreen";
@@ -14,6 +15,7 @@ import SignUp from "./SignUp";
 import Welcome from "./Welcome";
 
 export {
+  ChatList,
   Example,
   GitHubUserScreen,
   HomeScreen,
