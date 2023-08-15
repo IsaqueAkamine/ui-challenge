@@ -1,16 +1,21 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 import { Button, Container, Input } from "./styles";
-import { TextInputProps } from "react-native";
+import { TextInputProps, View } from "react-native";
 
 interface HeaderProps {
   input: TextInputProps;
   onSearch: () => void;
+  onClear: () => void;
 }
 
-const HeaderChatList: React.FC<HeaderProps> = ({ input, onSearch }) => {
+const HeaderChatList: React.FC<HeaderProps> = ({
+  input,
+  onSearch,
+  onClear,
+}) => {
   const navigation = useNavigation();
 
   function handleBackNavigation() {
@@ -22,11 +27,27 @@ const HeaderChatList: React.FC<HeaderProps> = ({ input, onSearch }) => {
       <Button onPress={handleBackNavigation}>
         <Feather name="arrow-left" size={24} color="#000" />
       </Button>
-      <Input
-        placeholder="Find user..."
-        onChangeText={input.onChangeText}
-        value={input.value}
-      />
+      <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }}>
+        <Input
+          placeholder="Find user..."
+          onChangeText={input.onChangeText}
+          value={input.value}
+        />
+
+        {input.value.length > 0 && (
+          <Button
+            onPress={onClear}
+            style={{
+              position: "absolute",
+              right: 20,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <MaterialIcons name="clear" size={20} color="#000" />
+          </Button>
+        )}
+      </View>
       <Button onPress={onSearch}>
         <Feather name="search" size={24} color="#000" />
       </Button>

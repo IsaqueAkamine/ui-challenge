@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   CardContainer,
   CardDate,
+  CardDateContainer,
+  CardDateTime,
   CardLastMessage,
   CardUserImage,
   CardUserInfo,
@@ -29,6 +31,7 @@ import {
 } from "firebase/firestore";
 import { FIREBASE_DB } from "../../services/firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
+import { ChatContext } from "../../contexts/ChatContext";
 
 interface UserProps {
   displayName: string;
@@ -36,21 +39,39 @@ interface UserProps {
   photoURL: string;
   uid: string;
 }
-interface ChatUserProps {
-  displayName: string;
-  email: string;
-  photoURL: string;
-  uid: string;
-  lastMessage: string;
-  date: string;
+
+interface UserInfoProps {
+  date: {
+    nanoseconds: number;
+    seconds: number;
+  };
+  userInfo: {
+    displayName: string;
+    photoURL: string;
+    uid: string;
+  };
 }
+interface ChatUserProps {
+  0: string;
+  1: UserInfoProps;
+}
+// interface ChatUserProps {
+//   displayName: string;
+//   email: string;
+//   photoURL: string;
+//   uid: string;
+//   lastMessage: string;
+//   date: string;
+// }
 
 const ChatList: React.FC = () => {
   const currentUser = useContext(AuthContext).user;
+  const { dispatch } = useContext(ChatContext);
   const navigation = useNavigation();
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState<UserProps | null>(null);
   const [chats, setChats] = useState([]);
+  const [error, setError] = useState([]);
 
   async function handleSearch(): Promise<void> {
     const q = query(
@@ -60,32 +81,73 @@ const ChatList: React.FC = () => {
 
     try {
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
+
+      if (querySnapshot.size > 0) {
+        querySnapshot.forEach((doc) => {
+          setUser(doc.data());
+        });
+      } else {
+        Alert.alert("Error", "User not found!");
+      }
     } catch (error) {
-      Alert.alert("User", error.message);
+      Alert.alert("User", error);
     }
   }
 
-  function handleNavigation() {
+  function handleClearSearch() {
+    setUser(null);
+    setUserName("");
+  }
+
+  function handleNavigation(u: UserInfoProps) {
+    dispatch({ type: "CHANGE_USER", payload: u });
     navigation.navigate("Message");
   }
 
+  function formatSecondsToDate(seconds: number) {
+    const milliseconds = seconds * 1000;
+    const date = new Date(milliseconds);
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Mês começa em 0
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
+  function formatSecondsToDateTime(seconds: number) {
+    const milliseconds = seconds * 1000;
+    const date = new Date(milliseconds);
+
+    const hour = String(date.getHours()).padStart(2, "0");
+    const minute = String(date.getMinutes()).padStart(2, "0");
+    return `${hour}:${minute}`;
+  }
+
   function ChatCard(item: ChatUserProps) {
-    console.log("chatUser: ", item);
-    console.log("info: ", item[1]);
     const chatUser = item[1];
     return (
-      <CardContainer activeOpacity={0.7} onPress={handleNavigation}>
+      <CardContainer
+        activeOpacity={0.7}
+        onPress={() => handleNavigation(chatUser.userInfo)}
+      >
         <CardUserImage source={{ uri: chatUser?.userInfo?.photoURL }} />
         <CardUserInfo>
           <CardUserName>{chatUser?.userInfo?.displayName}</CardUserName>
-          {chatUser?.userInfo?.lastMessage && (
-            <CardLastMessage>{chatUser?.userInfo?.lastMessage}</CardLastMessage>
+          {chatUser?.lastMessage?.text && (
+            <CardLastMessage numberOfLines={1} ellipsizeMode="tail">
+              {chatUser?.lastMessage?.text}
+            </CardLastMessage>
           )}
         </CardUserInfo>
-        {chatUser?.date && <CardDate>{chatUser?.date.seconds}</CardDate>}
+        {chatUser?.date && (
+          <CardDateContainer>
+            <CardDate>{formatSecondsToDate(chatUser?.date.seconds)}</CardDate>
+            <CardDateTime>
+              {formatSecondsToDateTime(chatUser?.date.seconds)}
+            </CardDateTime>
+          </CardDateContainer>
+        )}
       </CardContainer>
     );
   }
@@ -143,7 +205,9 @@ const ChatList: React.FC = () => {
       const unsubscribe = onSnapshot(
         doc(FIREBASE_DB, "userChats", currentUser?.uid),
         (doc) => {
-          const res = Object.entries(doc.data());
+          const res = Object.entries(doc.data()).sort(
+            (a, b) => b[1].date - a[1].date
+          );
           setChats(res);
         }
       );
@@ -160,6 +224,7 @@ const ChatList: React.FC = () => {
         <HeaderChatList
           input={{ onChangeText: setUserName, value: userName }}
           onSearch={handleSearch}
+          onClear={handleClearSearch}
         />
         {user && (
           <>

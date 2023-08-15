@@ -41,8 +41,22 @@ export const CardUserInfo = styled.View`
   margin: 0 12px;
 `;
 
-export const CardUserName = styled.Text``;
+export const CardUserName = styled.Text`
+  font-family: "Quicksand_700Bold";
+  font-size: 16px;
+`;
 
-export const CardLastMessage = styled.Text``;
+export const CardLastMessage = styled.Text`
+  font-family: "Quicksand_400Regular";
+  font-size: 14px;
+`;
 
+export const CardDateContainer = styled.View`
+  align-items: flex-end;
+`;
 export const CardDate = styled.Text``;
+export const CardDateTime = styled.Text`
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: ${COLORS.gray};
+`;

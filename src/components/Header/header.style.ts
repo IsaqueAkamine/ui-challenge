@@ -13,8 +13,10 @@ export const BackButton = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-  flex: 1;
+  position: absolute;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   font-family: "Quicksand_700Bold";
+  left: 80px;
+  right: 80px;
 `;
