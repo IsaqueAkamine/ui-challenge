@@ -1,11 +1,13 @@
 import {
+  DrawerContentScrollView,
+  DrawerItem,
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { Image, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../contexts/auth";
 
 import {
   HomeScreen,
@@ -17,18 +19,29 @@ import {
 import { JobStack } from "./JobStack";
 import MovieStack from "./MovieStack";
 import ChatStack from "./ChatStack";
+import { getBottomSpace } from "react-native-iphone-x-helper";
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerMenu() {
   const { t } = useTranslation();
-  return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      screenOptions={{ headerShown: false, unmountOnBlur: true }}
-      drawerContent={(props) => {
-        return (
-          <SafeAreaView>
+  const { logOut } = useAuth();
+
+  function CustomDrawerContent(props) {
+    return (
+      <DrawerContentScrollView
+        {...props}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flex: 1 }}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "space-between",
+            paddingBottom: getBottomSpace(),
+          }}
+        >
+          <View style={{ flex: 1 }}>
             <View
               style={{
                 justifyContent: "center",
@@ -45,9 +58,32 @@ export default function DrawerMenu() {
                 }}
               />
             </View>
+
             <DrawerItemList {...props} />
-          </SafeAreaView>
-        );
+          </View>
+
+          <DrawerItem
+            style={{
+              borderTopColor: "#f4f4f4",
+              borderTopWidth: 1,
+            }}
+            icon={({ color, size }) => (
+              <FontAwesome name={"sign-out"} size={size} color={color} />
+            )}
+            label="Logout"
+            onPress={() => logOut()}
+          />
+        </View>
+      </DrawerContentScrollView>
+    );
+  }
+
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false, unmountOnBlur: true }}
+      drawerContent={(props) => {
+        return <CustomDrawerContent {...props} />;
       }}
     >
       <Drawer.Screen
