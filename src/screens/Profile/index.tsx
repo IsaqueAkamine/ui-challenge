@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../components/Header";
 import SocialData from "./SocialData";
 
@@ -12,14 +12,19 @@ import {
   UserLocation,
   UserName,
 } from "./profile.styles";
+import { AuthContext } from "../../contexts/auth";
 
 export default function ProfileScreen() {
-  const image = require("../../assets/images/profile-img.jpg");
+  const { user } = useContext(AuthContext);
+
   return (
     <Container>
       <Header iconColor="#405572" containerStyle={{ marginTop: 14 }} />
-      <Image source={image} style={{ resizeMode: "contain" }} />
-      <UserName>John Doe</UserName>
+      <Image
+        source={{ uri: user?.photoURL }}
+        style={{ resizeMode: "contain" }}
+      />
+      <UserName>{user?.displayName}</UserName>
       <UserDescription>Visual Designer and Photographer</UserDescription>
       <UserLocation>London, UK</UserLocation>
 
