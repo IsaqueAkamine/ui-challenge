@@ -1,4 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
+import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+
+import {
+  collection,
+  query,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  getDoc,
+  onSnapshot,
+} from "firebase/firestore";
+import { User } from "firebase/auth";
+import { FIREBASE_DB } from "../../services/firebaseConfig";
+import { AuthContext } from "../../contexts/auth";
+import { ChatContext } from "../../contexts/ChatContext";
+
+import HeaderSearchUser from "./HeaderSearchUser";
+import HeaderUserList from "./HeaderUserList";
+import { SIZES } from "../../constants";
 
 import {
   CardContainer,
@@ -10,28 +32,9 @@ import {
   CardUserInfo,
   CardUserName,
   Container,
-  NewCardContainer,
-  SafeArea,
+  HeaderContainer,
   Title,
 } from "./styles";
-import HeaderChatList from "./HeaderChatList";
-import { Alert, FlatList } from "react-native";
-import { AuthContext } from "../../contexts/auth";
-import {
-  collection,
-  getDocs,
-  query,
-  setDoc,
-  doc,
-  where,
-  updateDoc,
-  serverTimestamp,
-  getDoc,
-  onSnapshot,
-} from "firebase/firestore";
-import { FIREBASE_DB } from "../../services/firebaseConfig";
-import { useNavigation } from "@react-navigation/native";
-import { ChatContext } from "../../contexts/ChatContext";
 
 interface UserProps {
   displayName: string;
@@ -55,14 +58,6 @@ interface ChatUserProps {
   0: string;
   1: UserInfoProps;
 }
-// interface ChatUserProps {
-//   displayName: string;
-//   email: string;
-//   photoURL: string;
-//   uid: string;
-//   lastMessage: string;
-//   date: string;
-// }
 
 const ChatList: React.FC = () => {
   const currentUser = useContext(AuthContext).user;
@@ -70,33 +65,23 @@ const ChatList: React.FC = () => {
   const navigation = useNavigation();
   const [userName, setUserName] = useState("");
   const [user, setUser] = useState<UserProps | null>(null);
+  const [usersFirebase, setUsersFirebase] = useState<User[]>([]);
+  const [usersFilteredFirebase, setFilteredUsersFirebase] = useState<User[]>(
+    []
+  );
   const [chats, setChats] = useState([]);
-  const [error, setError] = useState([]);
 
   async function handleSearch(): Promise<void> {
-    const q = query(
-      collection(FIREBASE_DB, "users"),
-      where("displayName", "==", userName)
+    const filteredUsers = usersFirebase?.filter(
+      (user) => user.displayName == userName
     );
-
-    try {
-      const querySnapshot = await getDocs(q);
-
-      if (querySnapshot.size > 0) {
-        querySnapshot.forEach((doc) => {
-          setUser(doc.data());
-        });
-      } else {
-        Alert.alert("Error", "User not found!");
-      }
-    } catch (error) {
-      Alert.alert("User", error);
-    }
+    setFilteredUsersFirebase(filteredUsers | []);
   }
 
   function handleClearSearch() {
     setUser(null);
     setUserName("");
+    setFilteredUsersFirebase(usersFirebase);
   }
 
   function handleNavigation(u: UserInfoProps) {
@@ -182,22 +167,11 @@ const ChatList: React.FC = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-      setUser(null);
-      setUserName("");
+
+      handleClearSearch();
     } catch (error) {
       console.log("ERROR: ", error.message);
     }
-  }
-
-  function NewChatCard(userCard: UserProps) {
-    return (
-      <NewCardContainer activeOpacity={0.7} onPress={handleSelect}>
-        <CardUserImage source={{ uri: userCard?.photoURL }} />
-        <CardUserInfo>
-          <CardUserName>{userCard?.displayName}</CardUserName>
-        </CardUserInfo>
-      </NewCardContainer>
-    );
   }
 
   useEffect(() => {
@@ -218,28 +192,47 @@ const ChatList: React.FC = () => {
     currentUser?.uid && getChats();
   }, [currentUser.uid]);
 
+  useEffect(() => {
+    const getUsers = () => {
+      const q = query(collection(FIREBASE_DB, "users"));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const users = [] as User[];
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        const filteredUsers = users?.filter((item) => {
+          return item.uid != currentUser.uid;
+        });
+        setFilteredUsersFirebase(filteredUsers);
+        setUsersFirebase(filteredUsers);
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    };
+    getUsers();
+  }, []);
+
   return (
-    <SafeArea>
-      <Container>
-        <HeaderChatList
+    <Container>
+      <StatusBar style="light" />
+      <HeaderContainer>
+        <HeaderSearchUser
           input={{ onChangeText: setUserName, value: userName }}
           onSearch={handleSearch}
           onClear={handleClearSearch}
         />
-        {user && (
-          <>
-            <Title>New chat with</Title>
-            {NewChatCard(user)}
-          </>
-        )}
-        <FlatList
-          data={chats}
-          renderItem={({ item }) => ChatCard(item)}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ gap: 8 }}
-        />
-      </Container>
-    </SafeArea>
+        <HeaderUserList users={usersFilteredFirebase} />
+      </HeaderContainer>
+      <FlatList
+        ListHeaderComponent={() => <Title>Chats</Title>}
+        data={chats}
+        renderItem={({ item }) => ChatCard(item)}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ gap: 8, paddingHorizontal: SIZES.padding }}
+      />
+    </Container>
   );
 };
 

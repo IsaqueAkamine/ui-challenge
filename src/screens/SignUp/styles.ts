@@ -7,7 +7,7 @@ export const SafeArea = styled.SafeAreaView`
   background-color: #000;
 `;
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: #000;
   padding-left: ${SIZES.padding}px;
@@ -35,7 +35,9 @@ export const Form = styled.View`
   margin-top: 56px;
 `;
 
-export const Footer = styled.View``;
+export const Footer = styled.View`
+  margin: 32px 0 0 0;
+`;
 
 export const HaveAccountContainer = styled.View`
   margin-top: 20px;

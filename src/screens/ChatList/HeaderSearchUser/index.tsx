@@ -11,7 +11,7 @@ interface HeaderProps {
   onClear: () => void;
 }
 
-const HeaderChatList: React.FC<HeaderProps> = ({
+const HeaderSearchUser: React.FC<HeaderProps> = ({
   input,
   onSearch,
   onClear,
@@ -25,10 +25,11 @@ const HeaderChatList: React.FC<HeaderProps> = ({
   return (
     <Container>
       <Button onPress={handleBackNavigation}>
-        <Feather name="arrow-left" size={24} color="#000" />
+        <Feather name="arrow-left" size={24} color="#fff" />
       </Button>
       <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }}>
         <Input
+          placeholderTextColor={"#FFF"}
           placeholder="Find user..."
           onChangeText={input.onChangeText}
           value={input.value}
@@ -44,15 +45,15 @@ const HeaderChatList: React.FC<HeaderProps> = ({
               justifyContent: "center",
             }}
           >
-            <MaterialIcons name="clear" size={20} color="#000" />
+            <MaterialIcons name="clear" size={20} color="#fff" />
           </Button>
         )}
       </View>
       <Button onPress={onSearch}>
-        <Feather name="search" size={24} color="#000" />
+        <Feather name="search" size={24} color="#fff" />
       </Button>
     </Container>
   );
 };
 
-export default HeaderChatList;
+export default HeaderSearchUser;

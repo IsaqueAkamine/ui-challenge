@@ -1,25 +1,32 @@
+import {
+  getStatusBarHeight,
+  getBottomSpace,
+} from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
 import { COLORS, SIZES } from "../../constants";
+import { Platform, StatusBar } from "react-native";
 
-export const SafeArea = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${COLORS.white};
-`;
 export const Container = styled.View`
   flex: 1;
-  padding: 0 ${SIZES.padding}px;
+  /* padding: 0 ${SIZES.padding}px; */
+  background-color: ${COLORS.white};
+  /* padding-top: ${Platform.OS === "ios"
+    ? getStatusBarHeight()
+    : StatusBar.currentHeight}px; */
 `;
 
-export const Title = styled.Text``;
+export const HeaderContainer = styled.View`
+  padding: 0 ${SIZES.padding}px;
+  padding-top: ${Platform.OS === "ios"
+    ? getStatusBarHeight()
+    : StatusBar.currentHeight}px;
+  background-color: ${COLORS.chats.header};
+`;
 
-export const NewCardContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-
-  border-width: 2px;
-  border-color: ${COLORS.lightOrange};
-  border-radius: 4px;
-  padding: 8px;
+export const Title = styled.Text`
+  margin: 12px 0 0 0;
+  font-family: "Quicksand_700Bold";
+  font-size: 22px;
 `;
 
 export const CardContainer = styled.TouchableOpacity`

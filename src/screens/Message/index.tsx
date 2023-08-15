@@ -69,7 +69,6 @@ const Message: React.FC = () => {
     const unsubscribe = onSnapshot(
       doc(FIREBASE_DB, "chats", data.chatId),
       (doc) => {
-        console.log("MESSAGE DOC: ", doc.data().messages);
         if (doc.exists()) {
           const msgs = doc
             .data()
@@ -94,8 +93,6 @@ const Message: React.FC = () => {
                 },
               };
             });
-
-          console.log("AUX MESSAGE: ", msgs);
 
           setMessages(msgs);
         }

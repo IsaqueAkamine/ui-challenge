@@ -48,4 +48,7 @@ export const COLORS = {
     background: "#FDFDFD",
     actionButton: "#2979FF",
   },
+  chats: {
+    header: "#0041FD",
+  },
 };
