@@ -14,8 +14,17 @@ import {
   WelcomeText,
 } from "./style";
 import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+interface ScreenProps {
+  id: number;
+  description: string;
+  icon: string;
+  path: string;
+}
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const { t, i18n } = useTranslation();
 
@@ -31,18 +40,22 @@ export default function HomeScreen() {
   };
 
   const list = [
-    { id: 1, description: "Profile", icon: "user" },
-    { id: 2, description: "Github User", icon: "github" },
-    { id: 3, description: "Find a job", icon: "search" },
-    { id: 4, description: "Movies", icon: "local-movies" },
-    { id: 5, description: "Chats", icon: "message" },
+    { id: 1, description: "Profile", icon: "user", path: "Profile" },
+    { id: 2, description: "Github User", icon: "github", path: "UserData" },
+    { id: 3, description: "Find a job", icon: "search", path: "SearchResults" },
+    { id: 4, description: "Movies", icon: "local-movies", path: "MovieStack" },
+    { id: 5, description: "Chats", icon: "message", path: "Chat" },
   ];
 
   const movieImage = require("../../assets/images/movie-img-cover.jpeg");
 
-  function renderCard(item) {
+  function handleNavigate(path: string) {
+    navigation.navigate(path);
+  }
+
+  function renderCard(item: ScreenProps) {
     return (
-      <CardContainer>
+      <CardContainer onPress={() => handleNavigate(item.path)}>
         {/* <CardImage source={movieImage} /> */}
         {item.id > 3 ? (
           <MaterialIcons name={item.icon} size={80} color="#ddd" />

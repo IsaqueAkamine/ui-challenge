@@ -44,7 +44,7 @@ export const WelcomeText = styled.Text`
   font-size: 26px;
 `;
 
-export const CardContainer = styled.View`
+export const CardContainer = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   padding: 12px;
