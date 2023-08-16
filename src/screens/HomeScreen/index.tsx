@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import { Image } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
-
-import { removeLoggedUser } from "../../storages/AuthStorage";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 import {
   ButtonLanguage,
   ButtonLanguageContainer,
   ButtonLanguageText,
-  ClearButton,
-  ClearButtonText,
+  CardContainer,
+  CardDescription,
+  CardImage,
   Container,
-  ImageContainer,
   WelcomeContainer,
   WelcomeText,
-} from "./home.style";
-import { useAuth } from "../../contexts/auth";
+} from "./style";
+import { FlatList } from "react-native";
 
 export default function HomeScreen() {
-  const { logOut } = useAuth();
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const { t, i18n } = useTranslation();
 
@@ -34,8 +30,37 @@ export default function HomeScreen() {
       });
   };
 
+  const list = [
+    { id: 1, description: "Profile", icon: "user" },
+    { id: 2, description: "Github User", icon: "github" },
+    { id: 3, description: "Find a job", icon: "search" },
+    { id: 4, description: "Movies", icon: "local-movies" },
+    { id: 5, description: "Chats", icon: "message" },
+  ];
+
+  const movieImage = require("../../assets/images/movie-img-cover.jpeg");
+
+  function renderCard(item) {
+    return (
+      <CardContainer>
+        {/* <CardImage source={movieImage} /> */}
+        {item.id > 3 ? (
+          <MaterialIcons name={item.icon} size={80} color="#ddd" />
+        ) : (
+          <Feather name={item.icon} size={80} color="#ddd" />
+        )}
+        <CardDescription>{item.description}</CardDescription>
+      </CardContainer>
+    );
+  }
+
   return (
     <Container>
+      <WelcomeContainer>
+        <WelcomeText>{t("home.Welcome")}</WelcomeText>
+        <WelcomeText>{t("home.to UI Challenge app")}</WelcomeText>
+      </WelcomeContainer>
+
       <ButtonLanguageContainer>
         <ButtonLanguage
           onPress={() => changeLanguage("en")}
@@ -51,26 +76,15 @@ export default function HomeScreen() {
         </ButtonLanguage>
       </ButtonLanguageContainer>
 
-      <ImageContainer>
-        <Image
-          source={require("../../assets/icons/drawer-icon.png")}
-          style={{
-            width: 260,
-            height: 195,
-            borderRadius: 4,
-            resizeMode: "contain",
-          }}
-        />
-      </ImageContainer>
-
-      <WelcomeContainer>
-        <WelcomeText>{t("home.Welcome")}</WelcomeText>
-        <WelcomeText>{t("home.to UI Challenge app")}</WelcomeText>
-      </WelcomeContainer>
-
-      <ClearButton onPress={() => logOut()}>
-        <ClearButtonText>{t("home.Log Out")}</ClearButtonText>
-      </ClearButton>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={list}
+        numColumns={2}
+        columnWrapperStyle={{ gap: 5, justifyContent: "space-around" }}
+        renderItem={({ item }) => renderCard(item)}
+        style={{ marginTop: 20 }}
+        contentContainerStyle={{ gap: 5 }}
+      />
     </Container>
   );
 }

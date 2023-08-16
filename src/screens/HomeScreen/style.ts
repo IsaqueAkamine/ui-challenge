@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { COLORS } from "../../constants/colors";
+import { SIZES } from "../../constants";
 
 interface ButtonLanguageProps {
   selected: boolean;
@@ -7,11 +8,12 @@ interface ButtonLanguageProps {
 
 export const Container = styled.View`
   flex: 1;
-  padding: 40px 28px;
-  background-color: ${COLORS.loginGray5};
+  padding: 10px ${SIZES.padding}px;
+  background-color: ${COLORS.white};
 `;
 
 export const ButtonLanguageContainer = styled.View`
+  margin-top: 12px;
   flex-direction: row;
   justify-content: center;
   gap: 8px;
@@ -32,14 +34,8 @@ export const ButtonLanguageText = styled.Text`
   text-align: center;
 `;
 
-export const ImageContainer = styled.View`
-  margin-top: 20px;
-  align-items: center;
-`;
-
 export const WelcomeContainer = styled.View`
-  flex: 1;
-  margin-top: 35px;
+  margin-top: 12px;
 `;
 
 export const WelcomeText = styled.Text`
@@ -48,20 +44,20 @@ export const WelcomeText = styled.Text`
   font-size: 26px;
 `;
 
-export const ClearButton = styled.TouchableOpacity`
-  background-color: ${COLORS.onboardingButtonPrimary};
-  height: 40px;
-  border-radius: 4px;
-  align-items: center;
+export const CardContainer = styled.View`
   justify-content: center;
-  padding: 10px 16px;
-  margin-top: 12px;
-  align-self: center;
+  align-items: center;
+  padding: 12px;
+  margin: 5px;
+  width: ${SIZES.width / 2 - 60}px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: #fff;
 `;
 
-export const ClearButtonText = styled.Text`
-  color: ${COLORS.white};
-  font-family: "Quicksand_700Bold";
-  font-size: 16px;
-  text-align: center;
+export const CardImage = styled.Image`
+  height: 90px;
+  width: 90px;
 `;
+
+export const CardDescription = styled.Text``;
