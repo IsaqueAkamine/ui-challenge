@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import { StatusBar } from "expo-status-bar";
 
 import {
@@ -60,6 +61,7 @@ interface ChatUserProps {
 }
 
 const ChatList: React.FC = () => {
+  const { t } = useTranslation();
   const currentUser = useContext(AuthContext).user;
   const { dispatch } = useContext(ChatContext);
   const navigation = useNavigation();
@@ -226,7 +228,7 @@ const ChatList: React.FC = () => {
         <HeaderUserList users={usersFilteredFirebase} />
       </HeaderContainer>
       <FlatList
-        ListHeaderComponent={() => <Title>Chats</Title>}
+        ListHeaderComponent={() => <Title>{t("chats.chat-title")}</Title>}
         data={chats}
         renderItem={({ item }) => ChatCard(item)}
         showsVerticalScrollIndicator={false}

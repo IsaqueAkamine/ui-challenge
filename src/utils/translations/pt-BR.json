@@ -26,10 +26,21 @@
     "notifications": {
       "Fail to fetch data": "Não foi possível carregar todos os dados"
     },
+    "chats": {
+      "search": "Encontrar usuário...",
+      "chat-title": "Conversas"
+    },
     "home": {
       "Welcome": "Bem vindo",
       "to UI Challenge app": "ao app de UI Challenge",
       "Log Out": "Sair"
+    },
+    "jobs": {
+      "title": "Designers de produto",
+      "jobs-found": "vagas encontradas"
+    },
+    "profile-screen": {
+      "follow": "Seguir"
     },
     "search-results": {
       "title": "Encontre o seu emprego perfeito",
@@ -39,6 +50,10 @@
     "map":{
       "travel-time": "Tempo de viagem",
       "destination": "Seu destino"
+    },
+    "movies-screen": {
+      "horizontal-title": "Populares",
+      "vertical-title": "Estréias"
     }
   }
 }

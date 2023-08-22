@@ -13,8 +13,10 @@ import {
   UserName,
 } from "./profile.styles";
 import { AuthContext } from "../../contexts/auth";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileScreen() {
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
 
   return (
@@ -29,7 +31,7 @@ export default function ProfileScreen() {
       <UserLocation>London, UK</UserLocation>
 
       <FollowButton>
-        <FollowButtonText>Follow</FollowButtonText>
+        <FollowButtonText>{t("profile-screen.follow")}</FollowButtonText>
       </FollowButton>
 
       <SocialDataContainer>

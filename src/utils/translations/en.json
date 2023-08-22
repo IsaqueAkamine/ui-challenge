@@ -27,10 +27,21 @@
     "notifications": {
       "Fail to fetch data": "Could not fetch all data"
     },
+    "chats": {
+      "search": "Find user...",
+      "chat-title": "Chats"
+    },
     "home": {
       "Welcome": "Welcome",
       "to UI Challenge app": "to UI Challenge app",
       "Log Out": "Log Out"
+    },
+    "jobs": {
+      "title": "Product Designers",
+      "jobs-found": "jobs founds"
+    },
+    "profile-screen": {
+      "follow": "Follow"
     },
     "search-results": {
       "title": "Find your perfect job",
@@ -40,6 +51,10 @@
     "map":{
       "travel-time": "Your travel time",
       "destination": "Your destination"
+    },
+    "movies-screen": {
+      "horizontal-title": "Popular Movies",
+      "vertical-title": "Upcoming Movies"
     }
   }
 }

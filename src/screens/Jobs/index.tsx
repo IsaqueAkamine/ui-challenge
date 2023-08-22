@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { getBottomSpace } from "react-native-iphone-x-helper";
+import { useTranslation } from "react-i18next";
+
 import { useJob } from "../../contexts/job";
 
 import Header from "../../components/Header";
@@ -19,6 +21,7 @@ import {
 } from "./jobs.style";
 
 function Jobs() {
+  const { t } = useTranslation();
   const [showFilterModal, setShowFilterModal] = useState(false);
   const { jobList } = useJob();
 
@@ -36,8 +39,8 @@ function Jobs() {
   function ListHeader() {
     return (
       <TitleContainer>
-        <Title>Product Designers</Title>
-        <JobsFoundText>{jobList.length} jobs founds</JobsFoundText>
+        <Title>{t("jobs.title")}</Title>
+        <JobsFoundText>{jobList.length} {t("jobs.jobs-found")}</JobsFoundText>
       </TitleContainer>
     );
   }

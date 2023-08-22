@@ -81,7 +81,7 @@ export default function Movies() {
           <AvatarImage source={image} style={{ resizeMode: "center" }} />
           <HeaderText>Hi, {user?.username}</HeaderText>
         </HeaderContainer>
-        <Title>Popular Movies</Title>
+        <Title>{t("movies-screen.horizontal-title")}</Title>
         {loadingApiData ? (
           <HorizontalMovieSkeleton />
         ) : (
@@ -98,7 +98,7 @@ export default function Movies() {
             }}
           />
         )}
-        <Title>Upcoming Movies</Title>
+        <Title>{t("movies-screen.vertical-title")}</Title>
       </>
     );
   }

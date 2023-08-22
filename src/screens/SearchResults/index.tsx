@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Image, ImageBackground } from "react-native";
+import { SafeAreaView, Image, ImageBackground, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ function SearchResults() {
       end={{ x: 0.9, y: 0.5 }}
       style={{ flex: 1, translateY: 90 }}
     >
-      <SafeAreaView style={{ flex: 0.4 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <Container>
           <Title>{t("search-results.title")}</Title>
           <Description>{t("search-results.description")}</Description>
@@ -42,22 +42,24 @@ function SearchResults() {
             <StartButtonIcon name="arrow-right" size={24} />
           </StartButtonContainer>
         </Container>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <ImageBackground
+            source={ImgOrb}
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+            resizeMode="contain"
+          >
+            <Image
+              source={ImgRocket}
+              resizeMode="cover"
+              style={{
+                flex: 1,
+                width: "100%",
+                marginTop: -70,
+              }}
+            />
+          </ImageBackground>
+        </View>
       </SafeAreaView>
-      <ImageBackground
-        source={ImgOrb}
-        style={{ flex: 0.6 }}
-        resizeMode="contain"
-      >
-        <Image
-          source={ImgRocket}
-          resizeMode="cover"
-          style={{
-            flex: 1,
-            width: "100%",
-            marginTop: -70,
-          }}
-        />
-      </ImageBackground>
     </LinearGradient>
   );
 }

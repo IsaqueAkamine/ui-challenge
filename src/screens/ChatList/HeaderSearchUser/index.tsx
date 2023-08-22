@@ -1,9 +1,10 @@
 import React from "react";
+import { TextInputProps, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 import { Button, Container, Input } from "./styles";
-import { TextInputProps, View } from "react-native";
 
 interface HeaderProps {
   input: TextInputProps;
@@ -16,6 +17,7 @@ const HeaderSearchUser: React.FC<HeaderProps> = ({
   onSearch,
   onClear,
 }) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
 
   function handleBackNavigation() {
@@ -30,7 +32,7 @@ const HeaderSearchUser: React.FC<HeaderProps> = ({
       <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }}>
         <Input
           placeholderTextColor={"#FFF"}
-          placeholder="Find user..."
+          placeholder={t("chats.search")}
           onChangeText={input.onChangeText}
           value={input.value}
         />
