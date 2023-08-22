@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, FlatList, SafeAreaView, Text, View } from "react-native";
-import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
+import { getBottomSpace } from "react-native-iphone-x-helper";
+import { useTranslation } from "react-i18next";
+
 import useMovies from "../../hooks/useMovies";
+import { AuthContext } from "../../contexts/auth";
+import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
+import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
+import { SIZES } from "../../constants";
+import { utils } from "../../utils";
+import { MovieProps } from "../../interfaces/movieTypes";
 import {
   AvatarImage,
   Container,
@@ -19,20 +27,12 @@ import {
   VerticalMovieInfoContainer,
   VerticalMovieTitle,
 } from "./movies.styles";
-import { SIZES } from "../../constants";
-import { utils } from "../../utils";
-import { MovieProps } from "../../interfaces/movieTypes";
-import HorizontalMovieSkeleton from "../../components/Skeletons/HorizontalMovieSkeleton";
-import VerticalMovieSkeleton from "../../components/Skeletons/VerticalMovieSkeleton";
-import { getBottomSpace } from "react-native-iphone-x-helper";
-import { useAuth } from "../../contexts/auth";
 
 export default function Movies() {
-  const image = require("../../assets/images/profile-img.jpg");
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { fetchData } = useMovies();
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
   const abortController = new AbortController();
 
   const [popularMovieList, setPopularMovieList] = useState<MovieProps[]>([]);
@@ -78,8 +78,11 @@ export default function Movies() {
     return (
       <>
         <HeaderContainer>
-          <AvatarImage source={image} style={{ resizeMode: "center" }} />
-          <HeaderText>Hi, {user?.username}</HeaderText>
+          <AvatarImage
+            source={{ uri: user?.photoURL }}
+            style={{ resizeMode: "center" }}
+          />
+          <HeaderText>Hi, {user?.displayName}</HeaderText>
         </HeaderContainer>
         <Title>{t("movies-screen.horizontal-title")}</Title>
         {loadingApiData ? (

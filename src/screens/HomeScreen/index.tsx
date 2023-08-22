@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 
@@ -10,11 +12,7 @@ import {
   CardDescription,
   CardImage,
   Container,
-  WelcomeContainer,
-  WelcomeText,
 } from "./style";
-import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 interface ScreenProps {
   id: number;
@@ -69,11 +67,6 @@ export default function HomeScreen() {
 
   return (
     <Container>
-      <WelcomeContainer>
-        <WelcomeText>{t("home.Welcome")}</WelcomeText>
-        <WelcomeText>{t("home.to UI Challenge app")}</WelcomeText>
-      </WelcomeContainer>
-
       <ButtonLanguageContainer>
         <ButtonLanguage
           onPress={() => changeLanguage("en")}

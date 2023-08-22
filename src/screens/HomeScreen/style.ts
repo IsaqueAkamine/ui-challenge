@@ -34,16 +34,6 @@ export const ButtonLanguageText = styled.Text`
   text-align: center;
 `;
 
-export const WelcomeContainer = styled.View`
-  margin-top: 12px;
-`;
-
-export const WelcomeText = styled.Text`
-  color: ${COLORS.onboardingTitlePrimary};
-  font-family: "Quicksand_700Bold";
-  font-size: 26px;
-`;
-
 export const CardContainer = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
