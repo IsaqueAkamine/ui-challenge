@@ -1,18 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useTranslation } from "react-i18next";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
+import LanguageSelector from "../../components/LanguageSelector";
 
-import {
-  ButtonLanguage,
-  ButtonLanguageContainer,
-  ButtonLanguageText,
-  CardContainer,
-  CardDescription,
-  CardImage,
-  Container,
-} from "./style";
+import { CardContainer, CardDescription, Container } from "./style";
 
 interface ScreenProps {
   id: number;
@@ -23,19 +15,6 @@ interface ScreenProps {
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const [currentLanguage, setCurrentLanguage] = useState("en");
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (value: string) => {
-    i18n
-      .changeLanguage(value)
-      .then(() => {
-        setCurrentLanguage(value);
-      })
-      .catch((error) => {
-        console.log("Error @changeLanguage", error);
-      });
-  };
 
   const list = [
     { id: 1, description: "Profile", icon: "user", path: "Profile" },
@@ -45,8 +24,6 @@ export default function HomeScreen() {
     { id: 5, description: "Chats", icon: "message", path: "Chat" },
   ];
 
-  const movieImage = require("../../assets/images/movie-img-cover.jpeg");
-
   function handleNavigate(path: string) {
     navigation.navigate(path);
   }
@@ -54,7 +31,6 @@ export default function HomeScreen() {
   function renderCard(item: ScreenProps) {
     return (
       <CardContainer onPress={() => handleNavigate(item.path)}>
-        {/* <CardImage source={movieImage} /> */}
         {item.id > 3 ? (
           <MaterialIcons name={item.icon} size={80} color="#ddd" />
         ) : (
@@ -67,20 +43,7 @@ export default function HomeScreen() {
 
   return (
     <Container>
-      <ButtonLanguageContainer>
-        <ButtonLanguage
-          onPress={() => changeLanguage("en")}
-          selected={currentLanguage === "en"}
-        >
-          <ButtonLanguageText>English</ButtonLanguageText>
-        </ButtonLanguage>
-        <ButtonLanguage
-          onPress={() => changeLanguage("ptBR")}
-          selected={currentLanguage === "ptBR"}
-        >
-          <ButtonLanguageText>Português Brasil</ButtonLanguageText>
-        </ButtonLanguage>
-      </ButtonLanguageContainer>
+      <LanguageSelector />
 
       <FlatList
         showsVerticalScrollIndicator={false}
