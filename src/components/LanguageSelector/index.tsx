@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Description, FlagImage, LanguageButton } from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SELECTED_LANGUAGE_KEY } from "../../constants/storage";
 
 const LanguageSelector: React.FC = () => {
   const flagBR = require("../../assets/icons/flag-br.png");
@@ -12,13 +14,26 @@ const LanguageSelector: React.FC = () => {
   const changeLanguage = (value: string) => {
     i18n
       .changeLanguage(value)
-      .then(() => {
+      .then(async () => {
         setCurrentLanguage(value);
+        await AsyncStorage.setItem(SELECTED_LANGUAGE_KEY, value);
       })
       .catch((error) => {
         console.log("Error @changeLanguage", error);
       });
   };
+
+  async function loadSelectedLanguage() {
+    const language = await AsyncStorage.getItem(SELECTED_LANGUAGE_KEY);
+    if (language) {
+      changeLanguage(language);
+      setCurrentLanguage(language);
+    }
+  }
+
+  useEffect(() => {
+    loadSelectedLanguage();
+  }, []);
 
   return (
     <Container>
@@ -35,7 +50,7 @@ const LanguageSelector: React.FC = () => {
         selected={currentLanguage === "ptBR"}
       >
         <FlagImage source={flagBR} resizeMode="stretch" />
-        <Description>Portugues</Description>
+        <Description>Português</Description>
       </LanguageButton>
     </Container>
   );
