@@ -33,7 +33,12 @@
     "home": {
       "Welcome": "Bem vindo",
       "to UI Challenge app": "ao app de UI Challenge",
-      "Log Out": "Sair"
+      "logout": "Sair",
+      "profile": "Perfil",
+      "github-user": "Github",
+      "find-job": "Vagas",
+      "movies": "Filmes",
+      "chat": "Conversas"
     },
     "jobs": {
       "title": "Designers de produto",

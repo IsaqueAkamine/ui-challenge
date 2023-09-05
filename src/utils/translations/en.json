@@ -34,7 +34,12 @@
     "home": {
       "Welcome": "Welcome",
       "to UI Challenge app": "to UI Challenge app",
-      "Log Out": "Log Out"
+      "logout": "Log Out",
+      "profile": "Profile",
+      "github-user": "Github",
+      "find-job": "Find a job",
+      "movies": "Movies",
+      "chat": "Chat"
     },
     "jobs": {
       "title": "Product Designers",

@@ -70,7 +70,7 @@ export default function DrawerMenu() {
             icon={({ color, size }) => (
               <FontAwesome name={"sign-out"} size={size} color={color} />
             )}
-            label="Logout"
+            label={t("home.logout")}
             onPress={() => logOut()}
           />
         </View>
@@ -102,8 +102,8 @@ export default function DrawerMenu() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          drawerLabel: "Profile",
-          title: "Profile",
+          drawerLabel: t("home.profile"),
+          title: t("home.profile"),
           drawerIcon: ({ size, color }) => (
             <Feather name="user" size={size} color={color} />
           ),
@@ -126,8 +126,8 @@ export default function DrawerMenu() {
         component={GitHubUserScreen}
         options={{
           headerShown: false,
-          drawerLabel: "Github User",
-          title: "Github User",
+          drawerLabel: t("home.github-user"),
+          title: t("home.github-user"),
           drawerIcon: ({ size, color }) => (
             <Feather name="github" size={size} color={color} />
           ),
@@ -138,8 +138,8 @@ export default function DrawerMenu() {
         component={JobStack}
         options={{
           headerShown: false,
-          drawerLabel: "Find a job",
-          title: "Search Results",
+          drawerLabel: t("home.find-job"),
+          title: t("home.find-job"),
           drawerIcon: ({ size, color }) => (
             <Feather name="search" size={size} color={color} />
           ),
@@ -150,8 +150,8 @@ export default function DrawerMenu() {
         component={MovieStack}
         options={{
           headerShown: false,
-          drawerLabel: "Movies",
-          title: "MovieStack",
+          drawerLabel: t("home.movies"),
+          title: t("home.movies"),
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="local-movies" size={size} color={color} />
           ),
@@ -162,8 +162,8 @@ export default function DrawerMenu() {
         component={ChatStack}
         options={{
           headerShown: false,
-          drawerLabel: "Chat",
-          title: "Chat",
+          drawerLabel: t("home.chat"),
+          title: t("home.chat"),
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="message" size={size} color={color} />
           ),
