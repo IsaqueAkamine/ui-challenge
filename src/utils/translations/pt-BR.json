@@ -20,7 +20,8 @@
         "description1": "Bem vindo de volta",
         "description2": "Você fez falta!",
         "have-account": "Não tem uma conta?",
-        "sign-up": "Cadastrar"
+        "sign-up": "Cadastrar",
+        "forgot-password": "Esqueceu a senha?"
       }
     },
     "notifications": {
